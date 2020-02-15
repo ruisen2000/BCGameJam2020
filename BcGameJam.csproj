@@ -56,6 +56,7 @@
     <Compile Include="assets\scripts\cameraFollow.cs" />
     <Compile Include="assets\scripts\Main.cs" />
     <Compile Include="assets\scripts\playerMovment.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="assets\scripts\ropePhysics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

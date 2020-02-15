@@ -7,11 +7,7 @@ public class playerMovment : KinematicBody2D
 	// private int a = 2;
 	// private string b = "text";
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
 
-	}
 
 	[Export]
 	float wallSlideSpeed = 100.0f;
@@ -23,13 +19,13 @@ public class playerMovment : KinematicBody2D
 	float airDashMod = 0.5f;
 
 	[Export]
-	 float gravity = 200.0f;
+	 float gravity;
 
 	[Export]
 	 int walkSpeed = 200;
 
 	[Export]
-	int jumpStrength = 400;
+	int jumpStrength = 560;
 
 	[Export]
 	int player = -1;
@@ -44,6 +40,30 @@ public class playerMovment : KinematicBody2D
 
 	public Vector2 velocity;
 	
+	double maxJumpVelocity;
+	double minJumpVelocity;
+	
+	double maxJumpHeight = 5 * Globals.UNIT_SIZE;
+	double minJumpHeight = 0.8 * Globals.UNIT_SIZE;
+	double jumpDuration =  0.6;
+	
+		// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
+		maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
+		minJumpVelocity = -Math.Sqrt(2 * gravity * minJumpHeight);
+		
+	}
+	
+	public override void _Input (InputEvent @event)
+	{
+		if(@event.IsActionReleased("player2_move_jump") && velocity.y < minJumpVelocity)
+		{
+			velocity.y = (float)minJumpVelocity;
+		}
+		
+	}
 
 	public override void _PhysicsProcess(float delta)
 	{
