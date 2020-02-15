@@ -45,10 +45,6 @@ margin_bottom = 100.0
 texture = ExtResource( 1 )
 stretch_mode = 4
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 371.838, 112.405 )
 scale = Vector2( 5.33105, 4.71462 )
