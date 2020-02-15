@@ -52,7 +52,7 @@ scale = Vector2( 5.33105, 4.71462 )
 frames = SubResource( 1 )
 animation = "New Anim"
 playing = true
-flip_v = true
+flip_h = true
 script = ExtResource( 3 )
 cloud_velocity = 2
 
