@@ -145,4 +145,10 @@ public class playerMovment : KinematicBody2D
 		//      
 		//  }
 	}
+
+
+	public void applyForce(Vector2 force)
+	{
+		velocity += force;
+	}
 }
