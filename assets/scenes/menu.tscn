@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/pixil-frame-0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/cloud-1.png.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/cloud.cs" type="Script" id=3]
+[ext_resource path="res://assets/scripts/cloud_right.cs" type="Script" id=4]
+[ext_resource path="res://assets/sprites/pixil-frame-0(1).png" type="Texture" id=5]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/nodes/fonts/SfPixelateShaded-dOyx.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = SubResource( 1 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.3344
+margin_top = 23.2852
+margin_right = -374.666
+margin_bottom = 19.2852
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pixil-frame-0(1)2" type="Sprite" parent="."]
+position = Vector2( 481.841, 279.733 )
+scale = Vector2( 1.3429, 1.40865 )
+texture = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 104.615
+margin_top = 96.9722
+margin_right = 935.615
+margin_bottom = 519.972
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="TextureRect" parent="VBoxContainer"]
+margin_right = 831.0
+margin_bottom = 100.0
+texture = ExtResource( 1 )
+stretch_mode = 4
+
+[node name="centerRow" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 831.0
+margin_bottom = 422.0
+size_flags_vertical = 3
+
+[node name="buttons" type="VBoxContainer" parent="VBoxContainer/centerRow"]
+margin_right = 831.0
+margin_bottom = 318.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="newGame" type="Button" parent="VBoxContainer/centerRow/buttons"]
+margin_right = 831.0
+margin_bottom = 20.0
+flat = true
+
+[node name="start" type="Label" parent="VBoxContainer/centerRow/buttons/newGame"]
+margin_left = 308.651
+margin_top = 85.4129
+margin_right = 553.651
+margin_bottom = 135.413
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.396078, 0.345098, 0.345098, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 20
+text = "NEW GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Label" parent="VBoxContainer/centerRow/buttons/newGame"]
+margin_left = 791.721
+margin_top = 335.058
+margin_right = 1036.72
+margin_bottom = 385.058
+rect_scale = Vector2( 0.464646, 0.765199 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.396078, 0.345098, 0.345098, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 20
+text = "exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 371.838, 112.405 )
+scale = Vector2( 5.33105, 4.71462 )
+frames = SubResource( 3 )
+playing = true
+flip_v = true
+script = ExtResource( 3 )
+cloud_velocity = 2
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 751.212, 53.8544 )
+scale = Vector2( 5.33105, 4.71462 )
+frames = SubResource( 3 )
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 737.01, 168.885 )
+scale = Vector2( 5.33105, 4.71462 )
+frames = SubResource( 3 )
+script = ExtResource( 3 )
