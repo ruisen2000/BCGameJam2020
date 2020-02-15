@@ -53,6 +53,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assets\scripts\cameraFollow.cs" />
     <Compile Include="assets\scripts\Main.cs" />
     <Compile Include="assets\scripts\playerMovment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
