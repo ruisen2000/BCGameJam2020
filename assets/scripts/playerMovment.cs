@@ -3,15 +3,14 @@ using System;
 
 public class playerMovment : KinematicBody2D
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
+	playerMovment otherPlayer;
 
-	}
+	[Export]
+	NodePath otherPlayerPath;
+
+	[Export]
+	NodePath ropeNode;
 
 	[Export]
 	float wallSlideSpeed = 100.0f;
@@ -23,13 +22,14 @@ public class playerMovment : KinematicBody2D
 	float airDashMod = 0.5f;
 
 	[Export]
-	 float gravity = 200.0f;
+	 float gravity;
 
 	[Export]
 	 int walkSpeed = 200;
+	 int strafeSpeed = 100;
 
 	[Export]
-	int jumpStrength = 400;
+	int jumpStrength = 560;
 
 	[Export]
 	int player = -1;
@@ -42,8 +42,33 @@ public class playerMovment : KinematicBody2D
 	bool onWall = false;
 	bool onFloor = false;
 
-	Vector2 velocity;
+	public Vector2 velocity;
 	
+	double maxJumpVelocity;
+	double minJumpVelocity;
+	
+	double maxJumpHeight = 5 * Globals.UNIT_SIZE;
+	double minJumpHeight = 0.8 * Globals.UNIT_SIZE;
+	double jumpDuration =  0.6;
+	
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		otherPlayer = (playerMovment)GetNode(otherPlayerPath);
+		gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
+		maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
+		minJumpVelocity = -Math.Sqrt(2 * gravity * minJumpHeight);
+		
+	}
+	
+	public override void _Input (InputEvent @event)
+	{
+		if(@event.IsActionReleased("player2_move_jump") && velocity.y < minJumpVelocity)
+		{
+			velocity.y = (float)minJumpVelocity;
+		}
+		
+	}
 
 	public override void _PhysicsProcess(float delta)
 	{
@@ -81,16 +106,15 @@ public class playerMovment : KinematicBody2D
 
 			if (Input.IsActionPressed("player1_move_left"))
 			{
-				velocity.x =  -walkSpeed;
+				velocity.x = -walkSpeed;
 			}
 			else if (Input.IsActionPressed("player1_move_right"))
 			{
 				velocity.x = walkSpeed;
-
 			}
 			else
 			{
-				velocity.x = 0;
+					velocity.x = 0;
 			}
 
 			if (Input.IsActionPressed("player1_move_jump"))
@@ -137,8 +161,24 @@ public class playerMovment : KinematicBody2D
 		// In the case of a 2D platformer, in Godot, upward is negative y, which translates to -1 as a normal.
 		MoveAndSlide(velocity, new Vector2(0, -1));
 
-		 onFloor = IsOnFloor();
-		 onWall = IsOnWall();
+		onFloor = IsOnFloor();
+		onWall = IsOnWall();
+
+		ropePhysics rope = (ropePhysics)GetNode(ropeNode);
+		if (rope.Length <= Position.DistanceTo(otherPlayer.Position))
+		{
+			//rope.calculateRope(GetPath());
+			Vector2 ropePullVector = (otherPlayer.Position - Position).Normalized();
+			Vector2 parallelPart = (velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
+			Vector2 orthogonalPart = velocity - parallelPart;
+			if (parallelPart.Dot(ropePullVector) < 0)
+			{
+				parallelPart = new Vector2(0, 0);
+			}
+			Vector2 newVelocity = parallelPart + orthogonalPart;
+			velocity = newVelocity;
+		}
+
 
 		//  // Called every frame. 'delta' is the elapsed time since the previous frame.
 		//  public override void _Process(float delta)

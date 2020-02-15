@@ -58,7 +58,12 @@
     <Compile Include="assets\scripts\cloud_right.cs" />
     <Compile Include="assets\scripts\Main.cs" />
     <Compile Include="assets\scripts\playerMovment.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="assets\scripts\ropePhysics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\scenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
