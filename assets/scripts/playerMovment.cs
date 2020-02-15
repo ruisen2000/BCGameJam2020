@@ -25,11 +25,11 @@ public class playerMovment : KinematicBody2D
 	 float gravity;
 
 	[Export]
-	 int walkSpeed = 200;
+	 int walkSpeed = 300;
 	 int strafeSpeed = 100;
 
 	[Export]
-	int jumpStrength = 560;
+	int jumpStrength = 640;
 
 	[Export]
 	int player = -1;
