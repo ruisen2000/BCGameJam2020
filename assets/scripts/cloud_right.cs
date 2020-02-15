@@ -18,11 +18,11 @@ public class cloud_right : AnimatedSprite
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
-	  	Vector2 mm = new Vector2( x,y);
+	  	Vector2 mm = new Vector2( Position.x,Position.y);
 		
 		mm.x += cloud_velocity/2;
-		
-		SetPosition(mm);
+
+		Position = mm;
 		
   }
 }
