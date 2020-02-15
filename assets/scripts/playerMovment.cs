@@ -42,7 +42,7 @@ public class playerMovment : KinematicBody2D
 	bool onWall = false;
 	bool onFloor = false;
 
-	Vector2 velocity;
+	public Vector2 velocity;
 	
 
 	public override void _PhysicsProcess(float delta)
