@@ -14,13 +14,9 @@ tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 327681, 0, 0, 327688, 0, 0
 
 [node name="Player 1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 354.246, 297.888 )
-otherPlayerPath = NodePath("../Player 2")
-ropeNode = NodePath("../RopePhysics")
 
 [node name="Player 2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 435.94, 346.14 )
-otherPlayerPath = NodePath("../Player 1")
-ropeNode = NodePath("../RopePhysics")
 player = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
