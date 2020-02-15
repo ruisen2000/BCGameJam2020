@@ -86,6 +86,7 @@ public class playerMovment : KinematicBody2D
 			else if (Input.IsActionPressed("player1_move_right"))
 			{
 				velocity.x = walkSpeed;
+
 			}
 			else
 			{
