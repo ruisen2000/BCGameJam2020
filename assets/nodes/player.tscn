@@ -1,20 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/animations/mainAnims.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/scripts/playerMovment.cs" type="Script" id=2]
+[ext_resource path="res://assets/sprites/player_audio/haoh!  jump ! ice climbing.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 16.6348
-height = 30.7656
+radius = 3.37131
+height = 16.5653
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
 animationsPath = NodePath("playerTemp")
 player = 1
+jump1_ = NodePath("playerTemp/jump")
 
 [node name="playerTemp" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "run"
 
+[node name="jump" type="AudioStreamPlayer" parent="playerTemp"]
+stream = ExtResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 3.84044, -2.12002 )
 shape = SubResource( 1 )

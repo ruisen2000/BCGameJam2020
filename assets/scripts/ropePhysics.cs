@@ -16,13 +16,16 @@ public class ropePhysics : Node2D
 	[Export]
 	float ropeLength;
 
+ 
+
 	playerMovment p1;
 	playerMovment p2;
+    
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+        
 		p1 = (playerMovment)(KinematicBody2D)GetNode(player1);
 		p2 = (playerMovment)(KinematicBody2D)GetNode(player2);
 	}
@@ -34,7 +37,6 @@ public class ropePhysics : Node2D
 
 		doRopePhysics(p1, p2, delta);
 		doRopePhysics(p2, p1, delta);
-
 
 		p1.move();
 		p2.move();
@@ -88,7 +90,6 @@ public class ropePhysics : Node2D
 			}
 
 			
-
 
 		}
 

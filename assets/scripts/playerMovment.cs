@@ -37,6 +37,11 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	float wallNoSlideTime = 1.0f;
 
+	[Export]
+	NodePath jump1_;
+
+	AudioStreamPlayer jump1;
+
 	AnimatedSprite animations;
 
 	float currentWallNoSlideTime = 0.0f;
@@ -59,7 +64,8 @@ public class playerMovment : KinematicBody2D
 	public override void _Ready()
 	{
 		animations = (AnimatedSprite)GetNode(animationsPath);
-		
+		jump1 = (AudioStreamPlayer)GetNode(jump1_);
+
 	}
 	
 	public override void _Input (InputEvent @event)
@@ -149,6 +155,7 @@ public class playerMovment : KinematicBody2D
 			{
 				if (onFloor)
 				{
+					make_jump();
 					velocity.y = -jumpStrength;
 				}
 			}
@@ -189,6 +196,7 @@ public class playerMovment : KinematicBody2D
 			{
 				if (onFloor)
 				{
+					make_jump();
 					velocity.y = -jumpStrength;
 				}
 			}
@@ -213,6 +221,11 @@ public class playerMovment : KinematicBody2D
 		// rope physics below
 
 
+	}
+
+	public void make_jump()
+	{
+		jump1.Play();
 	}
 
 	public void move()
