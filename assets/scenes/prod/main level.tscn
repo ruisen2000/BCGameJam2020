@@ -5,11 +5,11 @@
 [ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scripts/cameraFollow.cs" type="Script" id=4]
 [ext_resource path="res://assets/scenes/rope__.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/scripts/end_start.cs" type="Script" id=6]
+[ext_resource path="res://assets/scripts/end_scene.gd" type="Script" id=6]
 [ext_resource path="res://assets/nodes/Fires.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 141.994
+height = 404.657
 
 [node name="Node2D" type="Node2D"]
 
@@ -49,10 +49,11 @@ position = Vector2( -368, 528 )
 collision_mask = 2
 animationsPath = NodePath("../PLayer2/playerTemp")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2( 1311.58, 56.8422 )
+[node name="Area2D" type="Area2D" parent="."]
 script = ExtResource( 6 )
+p1 = NodePath("../Player1")
+p2 = NodePath("../PLayer2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( 0, 38.7312 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 4610.82, -6110.73 )
 shape = SubResource( 1 )
