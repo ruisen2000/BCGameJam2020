@@ -36,4 +36,3 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 player1 = NodePath("../Player 1")
 player2 = NodePath("../Player 2")
-ropeLength = 300.0
