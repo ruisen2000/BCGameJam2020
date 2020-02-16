@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/sprites/animations/mainAnims.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/scripts/playerMovment.cs" type="Script" id=2]
 [ext_resource path="res://assets/sprites/player_audio/haoh!  jump ! ice climbing.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/player_audio/hoo! jump ! ice climbing.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sprites/player_audio/hup! jump ! ice climbing.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sprites/player_audio/Oooph! ice climbing.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sprites/player_audio/Harh! fall  jump ! ice climbing.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sprites/player_audio/No! fall  jump ! ice climbing .wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.37131
@@ -17,6 +20,9 @@ player = 1
 jump1 = NodePath("playerTemp/jump")
 jump2 = NodePath("playerTemp/jump2")
 jump3 = NodePath("playerTemp/jump3")
+fall1 = NodePath("playerTemp/fall")
+fall2 = NodePath("playerTemp/fall2")
+fall3 = NodePath("playerTemp/fall3")
 
 [node name="playerTemp" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -30,6 +36,15 @@ stream = ExtResource( 4 )
 
 [node name="jump3" type="AudioStreamPlayer" parent="playerTemp"]
 stream = ExtResource( 5 )
+
+[node name="fall" type="AudioStreamPlayer" parent="playerTemp"]
+stream = ExtResource( 7 )
+
+[node name="fall2" type="AudioStreamPlayer" parent="playerTemp"]
+stream = ExtResource( 8 )
+
+[node name="fall3" type="AudioStreamPlayer" parent="playerTemp"]
+stream = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 3.84044, -2.12002 )
