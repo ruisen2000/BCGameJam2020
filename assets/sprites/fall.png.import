@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/run-2.png-067caa86d9d60ea28bcc46967d334f60.stex"
+path="res://.import/fall.png-762175c856956c25acb9cdbc44c43cee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/run_animation/run-2.png"
-dest_files=[ "res://.import/run-2.png-067caa86d9d60ea28bcc46967d334f60.stex" ]
+source_file="res://assets/sprites/fall.png"
+dest_files=[ "res://.import/fall.png-762175c856956c25acb9cdbc44c43cee.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
