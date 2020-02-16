@@ -46,13 +46,13 @@ public class ropePhysics : Node2D
 		if (Input.IsActionPressed("player1_move_up") || Input.IsActionPressed("player2_move_up"))
 		{
 			extendRope(delta);
-			GD.Print("Rope length now : " + ropeLength);
+		//	GD.Print("Rope length now : " + ropeLength);
 		}
 
 		if (Input.IsActionPressed("player1_move_down") || Input.IsActionPressed("player2_move_down"))
 		{
 			shrinkRope(delta);
-			GD.Print("Rope length now : " + ropeLength);
+		//	GD.Print("Rope length now : " + ropeLength);
 		}
 
 
