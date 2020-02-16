@@ -1,8 +1,4 @@
 shader_type canvas_item;
-
-// Gonkee's fire shader for Godot 3 - full tutorial https://youtu.be/CI3JZ-3cabg
-// If you use this shader, I would prefer it if you gave credit to me and my channel
-
 uniform vec4 transparent : hint_color;
 uniform vec4 inner : hint_color;
 uniform vec4 outer : hint_color;
@@ -23,7 +19,6 @@ float noise(vec2 coord){
 	vec2 i = floor(coord);
 	vec2 f = fract(coord);
 
-	// 4 corners of a rectangle surrounding our point
 	float a = rand(i);
 	float b = rand(i + vec2(1.0, 0.0));
 	float c = rand(i + vec2(0.0, 1.0));
