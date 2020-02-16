@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/pixil-frame-0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/pixil-frame-1.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/cloud.cs" type="Script" id=3]
 [ext_resource path="res://assets/scripts/cloud_right.cs" type="Script" id=4]
-[ext_resource path="res://assets/sprites/pixil-frame-0(1).png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/idle.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/button.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/cloud-2.png" type="Texture" id=7]
 
@@ -29,7 +30,7 @@ __meta__ = {
 [node name="pixil-frame-0(1)2" type="Sprite" parent="."]
 position = Vector2( 481.841, 279.733 )
 scale = Vector2( 1.3429, 1.40865 )
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 104.615
@@ -81,3 +82,8 @@ stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="idle" type="Sprite" parent="."]
+position = Vector2( 678.087, 344.51 )
+scale = Vector2( 1.3429, 1.40865 )
+texture = ExtResource( 5 )
