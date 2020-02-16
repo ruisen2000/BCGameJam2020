@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/grey_square.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/tile_set/icy.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -17,3 +20,17 @@ region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
 shape = SubResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 327680, 0, 0, 327682, 0, 0, 917503, 0, 0, 851968, 0, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+otherPlayerPath = NodePath("../KinematicBody2D2")
+
+[node name="KinematicBody2D2" parent="." instance=ExtResource( 4 )]
+otherPlayerPath = NodePath("../KinematicBody2D")
+player = 0
+
+[node name="RigidBody2D" parent="." instance=ExtResource( 3 )]

@@ -3,7 +3,7 @@
 [ext_resource path="res://ground.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scripts/cameraFollow.cs" type="Script" id=3]
-[ext_resource path="res://assets/scripts/ropePhysics.cs" type="Script" id=4]
+[ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node2D"]
 
@@ -30,8 +30,6 @@ current = true
 zoom = Vector2( 2, 2 )
 script = ExtResource( 3 )
 
-[node name="RopeController" type="Node2D" parent="."]
-script = ExtResource( 4 )
+[node name="RopeController" parent="." instance=ExtResource( 4 )]
 player1 = NodePath("../Player 1")
 player2 = NodePath("../Player 2")
-ropeLength = 300.0
