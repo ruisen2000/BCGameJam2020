@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/tile_set/icy.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
@@ -9,66 +9,16 @@
 [ext_resource path="res://assets/sprites/tile_set/deco/decos.tres" type="TileSet" id=7]
 [ext_resource path="res://assets/sprites/cloud-2.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/background_sky4.png" type="Texture" id=9]
-[ext_resource path="res://assets/scenes/rope__.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sprites/fog.shader" type="Shader" id=10]
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://ground.tres" type="TileSet" id=12]
-[ext_resource path="res://assets/scenes/Roping.gd" type="Script" id=13]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform vec3 color = vec3(0.35, 0.48, 0.95);
-uniform int OCTAVES = 4;
-
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
-}
-
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-
-	
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-
-	vec2 cubic = f * f * (3.0 - 2.0 * f);
-
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
-}
-
-float fbm(vec2 coord){
-	float value = 0.0;
-	float scale = 0.5;
-
-	for(int i = 0; i < OCTAVES; i++){
-		value += noise(coord) * scale;
-		coord *= 2.0;
-		scale *= 0.5;
-	}
-	return value;
-}
-
-void fragment() {
-	vec2 coord = UV * 20.0;
-
-	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
-
-	float final = fbm(coord + motion);
-
-	COLOR = vec4(color, final * 0.5);
-}
-"
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = SubResource( 2 )
+shader = ExtResource( 10 )
 shader_param/color = Vector3( 0.9, 0.8, 0.95 )
 shader_param/OCTAVES = 8
 
 [node name="World" type="Node2D"]
-script = ExtResource( 13 )
 
 [node name="Rope" parent="." instance=ExtResource( 4 )]
 position = Vector2( -336, 544 )
@@ -182,5 +132,3 @@ position = Vector2( 1226.11, 475.545 )
 rotation = -0.185005
 scale = Vector2( 17.8474, 18.9626 )
 texture = ExtResource( 8 )
-
-[node name="rope__" parent="." instance=ExtResource( 10 )]
