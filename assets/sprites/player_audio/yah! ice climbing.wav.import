@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/yah! ice climbing.wav-c23d829d0f817f40cac33e1858d0a653.sample"
+
+[deps]
+
+source_file="res://assets/sprites/player_audio/yah! ice climbing.wav"
+dest_files=[ "res://.import/yah! ice climbing.wav-c23d829d0f817f40cac33e1858d0a653.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

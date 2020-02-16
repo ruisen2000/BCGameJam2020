@@ -21,6 +21,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
+<<<<<<< HEAD
+gd_global_audio="res://assets/scripts/gd_global_audio.gd"
+=======
+>>>>>>> 35887d1826a3e6a048e39d023eb91f385af275e8
 Globals="*res://Globals.cs"
 
 [input]
