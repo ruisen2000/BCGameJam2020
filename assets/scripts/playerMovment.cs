@@ -129,9 +129,12 @@ public class playerMovment : KinematicBody2D
 			velocity.y = (float)minJumpVelocity;
 		}
 	}
+	
 
 	public override void _PhysicsProcess(float delta)
 	{
+	 
+
 		airXAccel = 0.0f;
 
 		if (onFloor || onWall)
@@ -227,7 +230,7 @@ public class playerMovment : KinematicBody2D
 				}
 			}
 
-			if (Input.IsActionPressed("player1_move_jump"))
+			if (Input.IsActionJustPressed("player1_move_jump"))
 			{
 
 				if (onFloor)
@@ -249,9 +252,6 @@ public class playerMovment : KinematicBody2D
 
 				}
 			}
-			
-					//animation stuff
-		if(onFloor && velocity.x != 0){
 			if (velocity.x < 0)
 			{
 				animations.FlipH = false;
@@ -260,7 +260,13 @@ public class playerMovment : KinematicBody2D
 			{
 				animations.FlipH = true;
 			}
+
+			//animation stuff
+			if (onFloor && velocity.x != 0){
+			
+			//Restarts the animation
 			animations.Play("run");
+				
 		}else if(!onFloor && velocity.y >= walkSpeed) {
 			animations.Play("fall");
 		}else if(!onFloor) {
@@ -312,7 +318,7 @@ public class playerMovment : KinematicBody2D
 					velocity.x = 0;
 				}
 			}
-			if (Input.IsActionPressed("player2_move_jump"))
+			if (Input.IsActionJustPressed("player2_move_jump"))
 			{
 				
 				if (onFloor)
@@ -333,8 +339,7 @@ public class playerMovment : KinematicBody2D
 					}
 				}
 			}
-			
-		if(onFloor && velocity.x != 0){
+
 			if (velocity.x < 0)
 			{
 				animations.FlipH = false;
@@ -343,6 +348,8 @@ public class playerMovment : KinematicBody2D
 			{
 				animations.FlipH = true;
 			}
+			if (onFloor && velocity.x != 0){
+			
 			animations.Play("run2");
 		}else if(!onFloor && velocity.y >= walkSpeed) {
 			animations.Play("fall2");
