@@ -25,7 +25,8 @@ player1Path = NodePath("../Player1")
 player2Path = NodePath("../PLayer2")
 
 [node name="Node2D" parent="Camera2D" instance=ExtResource( 7 )]
-position = Vector2( 477.429, 455.336 )
+position = Vector2( 743.395, 501.974 )
+scale = Vector2( 0.397326, 0.766881 )
 
 [node name="RopeController" parent="." instance=ExtResource( 3 )]
 position = Vector2( -4.02994, 12.1829 )
