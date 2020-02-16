@@ -220,24 +220,19 @@ public class playerMovment : KinematicBody2D
 				{
 					strafeInfluence = 0;
 				}
-				else if (airXAccel > 0)
+				else if (airXAccel < 0)
 				{
-					strafeInfluence = airXAccel * (float)(Math.Cos((-ropePullVector).Angle()) + 0.5);
+					strafeInfluence = airXAccel * (float)(Math.Cos((-ropePullVector).Angle()) + 1);
 				}
 				else
 				{
-					strafeInfluence = airXAccel * (-1) * (float)(Math.Cos((-ropePullVector).Angle()) - 0.5);
+					strafeInfluence = airXAccel * (-1) * (float)(Math.Cos((-ropePullVector).Angle()) - 1);
 				}
-				//velocity = velocity + new Vector2(strafeInfluence, 0);
 				Vector2 parallelPart = (velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
-				Vector2 orthogonalPart = (velocity - parallelPart) * 0.9f;
 				if (parallelPart.Dot(ropePullVector) < 0)
 				{
-					parallelPart = new Vector2(0, 0);
+					velocity -= parallelPart;
 				}
-				Vector2 strafeVector = new Vector2(strafeInfluence * (float)Math.Cos(velocity.Normalized().x), strafeInfluence * (float)Math.Sin(velocity.Normalized().y));
-				Vector2 newVelocity = parallelPart + orthogonalPart + strafeVector;
-				velocity = newVelocity;
 			}
 		}
 
