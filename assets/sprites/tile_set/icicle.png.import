@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/run-1.png-4d0425165b857f7c4ae0a8f6e2f8cd80.stex"
+path="res://.import/icicle.png-470179369f573e5518d930d151e05c57.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/run_animation/run-1.png"
-dest_files=[ "res://.import/run-1.png-4d0425165b857f7c4ae0a8f6e2f8cd80.stex" ]
+source_file="res://assets/sprites/tile_set/icicle.png"
+dest_files=[ "res://.import/icicle.png-470179369f573e5518d930d151e05c57.stex" ]
 
 [params]
 
