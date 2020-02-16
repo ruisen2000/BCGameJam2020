@@ -37,6 +37,19 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	float wallNoSlideTime = 1.0f;
 
+	[Export]
+	NodePath jump1;
+
+	[Export]
+	 NodePath jump2;
+
+	[Export]
+	NodePath jump3;
+
+	AudioStreamPlayer jj1;
+	AudioStreamPlayer jj2;
+	AudioStreamPlayer jj3;
+
 	AnimatedSprite animations;
 
 	float currentWallNoSlideTime = 0.0f;
@@ -59,6 +72,9 @@ public class playerMovment : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		jj1 = (AudioStreamPlayer)GetNode(jump1);
+		jj2 = (AudioStreamPlayer)GetNode(jump2);
+		jj3 = (AudioStreamPlayer)GetNode(jump3);
 		animations = (AnimatedSprite)GetNode(animationsPath);
 		airXAccel = 0;
 	}
@@ -159,8 +175,10 @@ public class playerMovment : KinematicBody2D
 
 			if (Input.IsActionPressed("player1_move_jump"))
 			{
+				
 				if (onFloor)
 				{
+					make_jump_sound();
 					velocity.y = -jumpStrength;
 				}
 				if (onWall && wallJumpReady)
@@ -214,8 +232,10 @@ public class playerMovment : KinematicBody2D
 			}
 			if (Input.IsActionPressed("player2_move_jump"))
 			{
+				
 				if (onFloor)
 				{
+					make_jump_sound();
 					velocity.y = -jumpStrength;
 				}
 				if (onWall && wallJumpReady)
@@ -245,6 +265,26 @@ public class playerMovment : KinematicBody2D
 		// rope physics below
 
 
+	}
+
+	public void make_jump_sound()
+	{
+		Random rnd = new Random();
+		int x = rnd.Next(1,4);
+
+		switch (x)
+		{
+			case 1:
+				jj1.Play();
+				break;
+			case 2:
+				jj2.Play();
+				break;
+			case 3:
+				jj3.Play();
+				break;
+
+		}
 	}
 
 	public void move()
