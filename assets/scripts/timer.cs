@@ -25,6 +25,15 @@ public class timer : Node2D
 	AnimatedSprite p2_;
 	Label hint_field;
 
+	[Export]
+	NodePath timerPath;
+	
+	[Export]
+	NodePath displayPath;
+	
+	[Export]
+	NodePath climbButtonPath;
+	
 
 
 	public override void _Ready()
@@ -35,9 +44,9 @@ public class timer : Node2D
 
 		p1_ = (AnimatedSprite)GetNode(p1);
 		p2_ = (AnimatedSprite)GetNode(p2);
-		timer_ = (Timer)GetNode("myTimer");
-		label = (Label)GetNode("display");
-		begin_game = (TextureButton)GetNode("climb_button");
+		timer_ = (Timer)GetNode(timerPath);
+		label = (Label)GetNode(displayPath);
+		begin_game = (TextureButton)GetNode(climbButtonPath);
 		begin_game.Visible = false;
 	}
 
