@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BcGameJam"
-run/main_scene="res://assets/scenes/menu.tscn"
+run/main_scene="res://assets/scenes/prod/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

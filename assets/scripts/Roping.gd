@@ -7,14 +7,16 @@ extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
+export(NodePath) var p1Path
+export(NodePath) var p2Path
 
 var p1
 var p2
 var rope
 
 func _ready():
-	p1 = get_node("KinematicBody2D") # Replace with function body.
-	p2 = get_node("KinematicBody2D2")
+	p1 = get_node(p1Path) # Replace with function body.
+	p2 = get_node(p2Path)
 	rope = get_node("rope__")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
