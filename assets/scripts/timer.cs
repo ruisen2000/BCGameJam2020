@@ -53,7 +53,7 @@ public class timer : Node2D
 			begin_game.Visible = true;
 			if (begin_game.Pressed)
 			{
-				GetTree().ChangeScene("res://assets/scenes/FirstLevel.tscn");
+				GetTree().ChangeScene("res://assets/scenes/prod/main level.tscn");
 			}
 		}
  }
