@@ -46,9 +46,25 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	NodePath jump3;
 
+
+	[Export]
+	NodePath fall1;
+
+	[Export]
+	NodePath fall2;
+
+	[Export]
+	NodePath fall3;
+
 	AudioStreamPlayer jj1;
 	AudioStreamPlayer jj2;
 	AudioStreamPlayer jj3;
+
+	AudioStreamPlayer hh1;
+	AudioStreamPlayer hh2;
+	AudioStreamPlayer hh3;
+
+	int buffer_y = 0;
 
 	AnimatedSprite animations;
 
@@ -75,6 +91,11 @@ public class playerMovment : KinematicBody2D
 		jj1 = (AudioStreamPlayer)GetNode(jump1);
 		jj2 = (AudioStreamPlayer)GetNode(jump2);
 		jj3 = (AudioStreamPlayer)GetNode(jump3);
+
+		hh1 = (AudioStreamPlayer)GetNode(fall1);
+		hh2 = (AudioStreamPlayer)GetNode(fall2);
+		hh3 = (AudioStreamPlayer)GetNode(fall3);
+
 		animations = (AnimatedSprite)GetNode(animationsPath);
 		airXAccel = 0;
 	}
@@ -264,15 +285,37 @@ public class playerMovment : KinematicBody2D
 			animations.Play("idle");
 		}
 
+		if (Position.y-buffer_y > 7) make_fall_sound();
 		// rope physics below
-
+		buffer_y = (int)Position.y;
 
 	}
 
+	public void make_fall_sound()
+	{
+		Random rnd = new Random();
+		int x = rnd.Next(1, 10);
+
+		switch (x)
+		{
+			case 1:
+				hh1.Play();
+				break;
+			case 2:
+				hh2.Play();
+				break;
+			case 3:
+				hh3.Play();
+				break;
+			default:
+				break;
+
+		}
+	}
 	public void make_jump_sound()
 	{
 		Random rnd = new Random();
-		int x = rnd.Next(1,4);
+		int x = rnd.Next(1,5);
 
 		switch (x)
 		{
@@ -284,6 +327,8 @@ public class playerMovment : KinematicBody2D
 				break;
 			case 3:
 				jj3.Play();
+				break;
+			default:
 				break;
 
 		}

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/sprites/tile_set/icy.tres" type="TileSet" id=1]
+[ext_resource path="res://ground.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scenes/MovingPlatformUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=4]
@@ -22,7 +22,7 @@ tile_data = PoolIntArray( -3670011, 0, 0, -3604475, 0, 0, -3538939, 0, 0, -34734
 position = Vector2( 1164.25, -3356.29 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 344.947, 465.123 )
+position = Vector2( 152.843, 471.598 )
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 355.06, -194.6 )
@@ -36,5 +36,5 @@ position = Vector2( 472.788, 450.353 )
 position = Vector2( 483.109, -2657.4 )
 
 [node name="KinematicBody2D2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 490.342, 360.24 )
+position = Vector2( 289.604, 416.36 )
 player = 0
