@@ -51,16 +51,32 @@ public class ropePhysics : Node2D
 			// tug on other player
 			if (ropePullVector.Dot(p1.velocity) < 0)
 			{
-				if (p2.isAnchored)
+				if (p1.isAnchored && !p2.isAnchored)
 				{
-					//otherPlayer.MoveAndSlide(velocity, new Vector2(0, -1));
-					//velocity *= 0.9f;
-				}
-				else
-				{
-					p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
+					p2.velocity += p1.velocity * 0.5f;
+					// p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
 					p1.velocity *= 0.5f;
 				}
+				//if (!p1.isAnchored && !p2.isAnchored)
+				//{
+				//	if (p1.velocity.x > 0)
+				//	{
+				//		p1.velocity.x -= p1.airXAccel;
+				//	}
+				//	else
+				//	{
+				//		p1.velocity.x += p1.airXAccel;
+				//	}
+				//	if (p2.velocity.x > 0)
+				//	{
+				//		p2.velocity.x -= p2.airXAccel;
+				//	}
+				//	else
+				//	{
+				//		p2.velocity.x += p2.airXAccel;
+				//	}
+					
+				//}
 			}
 
 			if (ropeLength <= p1.Position.DistanceTo(p2.Position))
@@ -84,7 +100,7 @@ public class ropePhysics : Node2D
 					p1.velocity -= parallelPart;
 				}
 
-				p1.velocity.x += strafeInfluence;
+				// p1.velocity.x += strafeInfluence;
 			}
 
 			

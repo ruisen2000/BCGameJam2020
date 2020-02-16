@@ -3,26 +3,21 @@
 [ext_resource path="res://ground.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scripts/cameraFollow.cs" type="Script" id=3]
-[ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/scripts/ropePhysics.cs" type="Script" id=4]
 
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 327681, 0, 0, 327688, 0, 0, 393217, 0, 0, 393220, 0, 0, 393221, 0, 0, 458753, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 589838, 0, 0, 655374, 0, 0 )
+tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 327681, 0, 0, 327688, 0, 0, 393217, 0, 0, 393220, 0, 0, 393221, 0, 0, 458753, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524315, 0, 0, 524316, 0, 0, 524317, 0, 0, 589838, 0, 0, 655374, 0, 0 )
 
 [node name="Player 1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 354.246, 297.888 )
-gravity = 200.0
 player = 0
-wallNoSlideTime = 0.0
 
 [node name="Player 2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 435.94, 346.14 )
-airDashMod = 0.2
-gravity = 200.0
-wallNoSlideTime = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 455.533, 437.572 )
@@ -30,6 +25,8 @@ current = true
 zoom = Vector2( 2, 2 )
 script = ExtResource( 3 )
 
-[node name="RopeController" parent="." instance=ExtResource( 4 )]
+[node name="RopeController" type="Node2D" parent="."]
+script = ExtResource( 4 )
 player1 = NodePath("../Player 1")
 player2 = NodePath("../Player 2")
+ropeLength = 300.0
