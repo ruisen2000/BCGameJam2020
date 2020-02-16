@@ -15,6 +15,7 @@ tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 327681, 0, 0, 327688, 0, 0
 [node name="Player 1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 354.246, 297.888 )
 otherPlayerPath = NodePath("../Player 2")
+animationsPath = null
 gravity = 200.0
 player = 0
 wallNoSlideTime = 0.0
@@ -22,6 +23,7 @@ wallNoSlideTime = 0.0
 [node name="Player 2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 435.94, 346.14 )
 otherPlayerPath = NodePath("../Player 1")
+animationsPath = null
 airDashMod = 0.2
 gravity = 200.0
 wallNoSlideTime = 0.0
@@ -34,6 +36,3 @@ script = ExtResource( 3 )
 
 [node name="RopeController" type="Node2D" parent="."]
 script = ExtResource( 4 )
-player1 = NodePath("../Player 1")
-player2 = NodePath("../Player 2")
-ropeLength = 300.0

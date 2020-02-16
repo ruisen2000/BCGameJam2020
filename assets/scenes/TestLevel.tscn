@@ -12,6 +12,7 @@ tile_data = PoolIntArray( 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 327683, 0, 0
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 354.246, 297.888 )
+animationsPath = null
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 163.331, 129.888 )

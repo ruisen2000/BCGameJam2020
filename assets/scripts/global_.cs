@@ -15,12 +15,7 @@ public class global_ : Node
 	{
 
 
-		AddChild(music_);
-        x = new AudioStream();
-        x.ResourcePath = "res://assets/sprites/soundtrack.ogg";
-		music_.Stream = x;
-
-		music_.Play();
+		
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.

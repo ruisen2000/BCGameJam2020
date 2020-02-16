@@ -60,6 +60,7 @@ shape = SubResource( 1 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 55.4623, -5.3847 )
+animationsPath = null
 wallSlideSpeed = 50.0
 gravity = 400.0
 player = 0
@@ -67,6 +68,7 @@ wallNoSlideTime = 0.5
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( -45.0519, -2.87184 )
+animationsPath = null
 wallSlideSpeed = 50.0
 gravity = 400.0
 wallNoSlideTime = 0.5
