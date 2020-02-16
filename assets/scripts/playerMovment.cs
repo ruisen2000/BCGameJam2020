@@ -3,11 +3,8 @@ using System;
 
 public class playerMovment : KinematicBody2D
 {
-
-	[Export]
-	NodePath otherPlayerPath;
 	
-		[Export]
+	[Export]
 	NodePath animationsPath;
 
 	[Export]
@@ -40,7 +37,6 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	float wallNoSlideTime = 1.0f;
 
-	playerMovment otherPlayer;
 	AnimatedSprite animations;
 
 	float currentWallNoSlideTime = 0.0f;
@@ -62,7 +58,6 @@ public class playerMovment : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		otherPlayer = (playerMovment)GetNode(otherPlayerPath);
 		animations = (AnimatedSprite)GetNode(animationsPath);
 		//gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
 		//maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
@@ -204,6 +199,14 @@ public class playerMovment : KinematicBody2D
 		
 		//animation stuff
 		if(onFloor && velocity.x != 0){
+			if (velocity.x < 0)
+			{
+				animations.FlipH = false;
+			}
+			else if (velocity.x > 0)
+			{
+				animations.FlipH = true;
+			}
 			animations.Play("run");
 		}
 		else{
