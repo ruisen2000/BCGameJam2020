@@ -18,7 +18,6 @@ shader_param/OCTAVES = 6
 [node name="Fires" type="Node2D"]
 
 [node name="Collidable" parent="." instance=ExtResource( 2 )]
-visible = false
 position = Vector2( 0, -1 )
 
 [node name="Fire" parent="." instance=ExtResource( 3 )]
@@ -56,3 +55,11 @@ position = Vector2( 2588.72, -1767.08 )
 [node name="Fire8" parent="." instance=ExtResource( 3 )]
 material = SubResource( 1 )
 position = Vector2( 114.183, -448.544 )
+
+[node name="Fire10" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 3137.79, -3054.3 )
+
+[node name="Fire11" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 1344.52, -2915.01 )
