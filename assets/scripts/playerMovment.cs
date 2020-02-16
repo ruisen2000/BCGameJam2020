@@ -4,25 +4,28 @@ using System;
 public class playerMovment : KinematicBody2D
 {
 
-	playerMovment otherPlayer;
-
 	[Export]
 	NodePath otherPlayerPath;
+	
+		[Export]
+	NodePath animationsPath;
 
 	[Export]
-	NodePath ropeNode;
+	float ropeLength = 300.0f;
 
 	[Export]
 	float wallSlideSpeed = 100.0f;
 
 	[Export]
-	float maxYVel = 500.0f;
+	public float maxXVel = 300.0f;
+	[Export]
+	public float maxYVel = 500.0f;
 
 	[Export]
-	float airDashMod = 0.5f;
+	float airDashMod = 0.4f;
 
 	[Export]
-	 float gravity;
+	public float gravity = 500;
 
 	[Export]
 	 int walkSpeed = 300;
@@ -37,10 +40,15 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	float wallNoSlideTime = 1.0f;
 
+	playerMovment otherPlayer;
+	AnimatedSprite animations;
+
 	float currentWallNoSlideTime = 0.0f;
-	bool inAir = false;
+	public bool isAnchored = false;
 	bool onWall = false;
 	bool onFloor = false;
+
+	public float airXAccel;
 
 	public Vector2 velocity;
 	
@@ -55,9 +63,10 @@ public class playerMovment : KinematicBody2D
 	public override void _Ready()
 	{
 		otherPlayer = (playerMovment)GetNode(otherPlayerPath);
-		gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
-		maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
-		minJumpVelocity = -Math.Sqrt(2 * gravity * minJumpHeight);
+		animations = (AnimatedSprite)GetNode(animationsPath);
+		//gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
+		//maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
+		//minJumpVelocity = -Math.Sqrt(2 * gravity * minJumpHeight);
 		
 	}
 	
@@ -72,6 +81,16 @@ public class playerMovment : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
+		airXAccel = 0.0f;
+
+		if (onFloor || onWall)
+		{
+			isAnchored = true;
+		}
+		else
+		{
+			isAnchored = false;
+		}
 
 		if (!onWall)
 		{
@@ -97,7 +116,6 @@ public class playerMovment : KinematicBody2D
 		if (onFloor)
 		{
 			currentWallNoSlideTime = 0;
-			inAir = false;
 		}
 
 		//Aight this is pretty bad I admit but w/e game jam!
@@ -106,15 +124,33 @@ public class playerMovment : KinematicBody2D
 
 			if (Input.IsActionPressed("player1_move_left"))
 			{
-				velocity.x = -walkSpeed;
+				if (onFloor)
+				{
+					velocity.x = -walkSpeed;
+				}
+				else if (!onWall)
+				{
+					velocity.x += -walkSpeed * airDashMod;
+				}
+				
 			}
 			else if (Input.IsActionPressed("player1_move_right"))
 			{
-				velocity.x = walkSpeed;
+				if (onFloor)
+				{
+					velocity.x = walkSpeed;
+				}
+				else if (!onWall)
+				{
+					velocity.x += walkSpeed * airDashMod;
+				}
 			}
 			else
 			{
+				if (onFloor)
+				{
 					velocity.x = 0;
+				}
 			}
 
 			if (Input.IsActionPressed("player1_move_jump"))
@@ -130,17 +166,33 @@ public class playerMovment : KinematicBody2D
 
 			if (Input.IsActionPressed("player2_move_left"))
 			{
-				velocity.x = -walkSpeed;
+				if (onFloor)
+				{
+					velocity.x = -walkSpeed;
+				}
+				else if (!onWall)
+				{
+					velocity.x += -walkSpeed * airDashMod;
+				}
 			}
 			else if (Input.IsActionPressed("player2_move_right"))
 			{
-				velocity.x = walkSpeed;
+				if (onFloor)
+				{
+					velocity.x = walkSpeed;
+				}
+				else if (!onWall)
+				{
+					velocity.x += walkSpeed * airDashMod;
+				}
 			}
 			else
 			{
-				velocity.x = 0;
+				if (onFloor)
+				{
+					velocity.x = 0;
+				}
 			}
-
 			if (Input.IsActionPressed("player2_move_jump"))
 			{
 				if (onFloor)
@@ -149,45 +201,39 @@ public class playerMovment : KinematicBody2D
 				}
 			}
 		}
-
-		if (inAir)
-		{
-			velocity.x *= airDashMod;
+		
+		//animation stuff
+		if(onFloor && velocity.x != 0){
+			animations.Play("run");
+		}
+		else{
+			animations.Play("idle");
 		}
 
-		// We don't need to multiply velocity by delta because "MoveAndSlide" already takes delta time into account.
+		// rope physics below
 
-		// The second parameter of "MoveAndSlide" is the normal pointing up.
-		// In the case of a 2D platformer, in Godot, upward is negative y, which translates to -1 as a normal.
+
+	}
+
+	public void move()
+	{
 		MoveAndSlide(velocity, new Vector2(0, -1));
 
 		onFloor = IsOnFloor();
 		onWall = IsOnWall();
-
-		ropePhysics rope = (ropePhysics)GetNode(ropeNode);
-		if (rope.Length <= Position.DistanceTo(otherPlayer.Position))
-		{
-			//rope.calculateRope(GetPath());
-			Vector2 ropePullVector = (otherPlayer.Position - Position).Normalized();
-			Vector2 parallelPart = (velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
-			Vector2 orthogonalPart = velocity - parallelPart;
-			if (parallelPart.Dot(ropePullVector) < 0)
-			{
-				parallelPart = new Vector2(0, 0);
-			}
-			Vector2 newVelocity = parallelPart + orthogonalPart;
-			velocity = newVelocity;
-		}
-
-
-		//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-		//  public override void _Process(float delta)
-		//  {
-		//      
-		//  }
 	}
 
+	public bool hitNonWall()
+	{
 
+		if (GetSlideCount() > 0 && !onFloor)
+		{
+			KinematicCollision2D col = GetSlideCollision(0);
+			return col.Normal.y > 0;
+			// true;
+		}
+		return false;
+	}
 	public void applyForce(Vector2 force)
 	{
 		velocity += force;

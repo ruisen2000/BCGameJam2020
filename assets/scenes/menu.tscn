@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/sprites/button_pressed.png" type="Texture" id=7]
 [ext_resource path="res://assets/scripts/new_game.cs" type="Script" id=8]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -51,7 +51,7 @@ stretch_mode = 4
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 371.838, 112.405 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 playing = true
 flip_v = true
 script = ExtResource( 3 )
@@ -60,13 +60,13 @@ cloud_velocity = 2
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 751.212, 53.8544 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 737.01, 168.885 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
