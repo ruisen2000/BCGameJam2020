@@ -26,6 +26,9 @@ player2Path = NodePath("../PLayer2")
 position = Vector2( -4.02994, 12.1829 )
 player1 = NodePath("../Player1")
 player2 = NodePath("../PLayer2")
+ropeMinLength = 100.0
+ropePullSpeed = 100.0
+ropePullForce = 100.0
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( -248, 536 )

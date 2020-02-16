@@ -16,7 +16,17 @@ public class ropePhysics : Node2D
 	[Export]
 	float ropeLength;
 
- 
+	[Export]
+	float ropeMaxLength = 600;
+
+	[Export]
+	float ropeMinLength = 50;
+
+	[Export]
+	float ropePullSpeed = 10.0f;
+
+	[Export]
+	float ropePullForce = 10.0f;
 
 	playerMovment p1;
 	playerMovment p2;
@@ -33,10 +43,39 @@ public class ropePhysics : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
+		if (Input.IsActionPressed("player1_move_up") || Input.IsActionPressed("player2_move_up"))
+		{
+			extendRope(delta);
+			GD.Print("Rope length now : " + ropeLength);
+		}
+
+		if (Input.IsActionPressed("player1_move_down") || Input.IsActionPressed("player2_move_down"))
+		{
+			shrinkRope(delta);
+			GD.Print("Rope length now : " + ropeLength);
+		}
 
 
 		doRopePhysics(p1, p2, delta);
 		doRopePhysics(p2, p1, delta);
+
+		//Only pull them together if they are farther apart then rope is allowed
+		if(ropeLength < p2.Position.DistanceTo(p1.Position))
+		{
+			Vector2 ropePullVector = (p2.Position - p1.Position).Normalized();
+
+			if (!p1.isAnchored && !p2.isAnchored)
+			{ //Both moving or in air, make it damped
+				p1.velocity += ropePullVector * ropePullForce * 0.1f;
+				p2.velocity -= ropePullVector * ropePullForce * 0.1f;
+			}
+			else
+			{//One is anchored pull full force
+				p1.velocity += ropePullVector * ropePullForce;
+				p2.velocity -= ropePullVector * ropePullForce;
+			}
+		}
+		
 
 		p1.move();
 		p2.move();
@@ -44,9 +83,35 @@ public class ropePhysics : Node2D
 
 	}
 
+	void shrinkRope(float delta)
+	{
+	
+		if(ropeLength <= ropeMinLength)
+		{
+			ropeLength = ropeMinLength;
+			return;
+		}
+
+		ropeLength -= delta* ropePullSpeed;
+	
+
+		
+	}
+
+	void extendRope(float delta)
+	{
+		if (ropeLength >= ropeMaxLength)
+		{
+			ropeLength = ropeMaxLength;
+			return;
+		}
+
+		ropeLength += delta* ropePullSpeed;
+
+	}
+
 	void doRopePhysics(playerMovment p1,playerMovment p2,float delta)
 	{
-
 		if (ropeLength <= p1.Position.DistanceTo(p2.Position))
 		{
 			Vector2 ropePullVector = (p2.Position - p1.Position).Normalized();
@@ -59,54 +124,16 @@ public class ropePhysics : Node2D
 					// p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
 					p1.velocity *= 0.5f;
 				}
-				//if (!p1.isAnchored && !p2.isAnchored)
-				//{
-				//	if (p1.velocity.x > 0)
-				//	{
-				//		p1.velocity.x -= p1.airXAccel;
-				//	}
-				//	else
-				//	{
-				//		p1.velocity.x += p1.airXAccel;
-				//	}
-				//	if (p2.velocity.x > 0)
-				//	{
-				//		p2.velocity.x -= p2.airXAccel;
-				//	}
-				//	else
-				//	{
-				//		p2.velocity.x += p2.airXAccel;
-				//	}
-					
-				//}
 			}
 
 			if (ropeLength <= p1.Position.DistanceTo(p2.Position))
 			{
-				float strafeInfluence;
-				if ((-ropePullVector).Angle() > Math.PI)
-				{
-					strafeInfluence = 0;
-				}
-				else if (p1.airXAccel < 0)
-				{
-					strafeInfluence = p1.airXAccel * (float)(Math.Cos((-ropePullVector).Angle()) + 1);
-				}
-				else
-				{
-					strafeInfluence = p1.airXAccel * (-1) * (float)(Math.Cos((-ropePullVector).Angle()) - 1);
-				}
 				Vector2 parallelPart = (p1.velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
 				if (parallelPart.Dot(ropePullVector) < 0)
 				{
 					p1.velocity -= parallelPart;
 				}
-
-				// p1.velocity.x += strafeInfluence;
 			}
-
-			
-
 		}
 
 
