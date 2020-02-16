@@ -57,6 +57,7 @@
     <Compile Include="assets\scripts\cloud.cs" />
     <Compile Include="assets\scripts\cloud_right.cs" />
     <Compile Include="assets\scripts\global_.cs" />
+    <Compile Include="assets\scripts\lightFlicker.cs" />
     <Compile Include="assets\scripts\Main.cs" />
     <Compile Include="assets\scripts\new_game.cs" />
     <Compile Include="assets\scripts\playerMovment.cs" />
