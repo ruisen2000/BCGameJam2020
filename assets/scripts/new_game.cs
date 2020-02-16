@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public class new_game : TextureButton
 {
 	// Declare member variables here. Examples:
@@ -8,6 +9,7 @@ public class new_game : TextureButton
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		
@@ -18,6 +20,7 @@ public class new_game : TextureButton
  {
 		if (Pressed)
 		{
+
 			GetTree().ChangeScene("res://assets/scenes/counters.tscn");
 		}
 	}

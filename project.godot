@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="BcGameJam"
 config/icon="res://icon.png"
 
+[autoload]
+
+global_="*res://assets/scripts/global_.cs"
+
 [input]
 
 ui_accept={
