@@ -13,8 +13,8 @@ var p2
 var rope
 
 func _ready():
-	p1 = get_node("Player 1") # Replace with function body.
-	p2 = get_node("Player 2")
+	p1 = get_node("KinematicBody2D") # Replace with function body.
+	p2 = get_node("KinematicBody2D2")
 	rope = get_node("rope__")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
