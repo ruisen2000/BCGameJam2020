@@ -1,27 +1,30 @@
 using Godot;
 using System;
 
-public class cloud : AnimatedSprite
+public class timer : Node2D
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
-	[Export]
-	public int cloud_velocity = 3;
+	Label label;
+	Timer timer_;
+
 	public override void _Ready()
 	{
-		
+		timer_ = (Timer)GetNode("myTimer");
+		label = (Label)GetNode("display");
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
-  {
-		Vector2 mm = new Vector2(Position.x, Position.y);
+ {
+		label.Text = ((int)timer_.TimeLeft).ToString();
 
-		mm.x -= cloud_velocity / 2;
-
-		Position = mm;
-	}
+		if(label.Text == "0")
+		{
+			GetTree().ChangeScene("res://assets/scenes/Roping.tscn");
+		}
+ }
 }
