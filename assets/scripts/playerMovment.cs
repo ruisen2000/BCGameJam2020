@@ -205,6 +205,8 @@ public class playerMovment : KinematicBody2D
 				animations.FlipH = true;
 			}
 			animations.Play("run");
+		}else if(!onFloor) {
+			animations.Play("swing");
 		}
 		else{
 			animations.Play("idle");
