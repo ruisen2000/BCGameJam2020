@@ -17,6 +17,14 @@ public class ropePhysics : Node2D
 	float ropeLength;
 
 	[Export]
+	NodePath ropeDrawPath;
+
+	[Export]
+	int ropePoints = 3;
+
+	Line2D ropeDraw;
+
+	[Export]
 	float ropeMaxLength = 600;
 
 	[Export]
@@ -38,8 +46,10 @@ public class ropePhysics : Node2D
 		
 		p1 = (playerMovment)(KinematicBody2D)GetNode(player1);
 		p2 = (playerMovment)(KinematicBody2D)GetNode(player2);
+		ropeDraw = (Line2D)GetNode(ropeDrawPath);
+
 	}
-	
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
@@ -144,6 +154,46 @@ public class ropePhysics : Node2D
 			p1.velocity.y += delta * p1.gravity;
 			p1.velocity.y = Math.Min(p1.velocity.y, p1.maxYVel);
 		}
+	}
+
+
+	public override void _Process(float delta)
+	{
+		float ropeNotUsed = ropeLength - p1.Position.DistanceTo(p2.Position);
+		
+
+		base._Process(delta);
+		ropeDraw.ClearPoints();
+		ropeDraw.AddPoint(p1.Position);
+		
+		for(int i = 1;i < ropePoints; i++)
+		{
+			float lerpVal = (float)i / (float)ropePoints;
+
+		//	GD.Print("Lerp val : " + lerpVal);
+		//	GD.Print("From " + i + " /" + ropePoints);
+			Vector2 tempPoint = vec2Lerp(p2.Position, p1.Position, lerpVal);
+			if(lerpVal >= 0.5f)
+			{
+				tempPoint.y += ropeNotUsed * -(lerpVal - 1) * lerpVal;
+				//GD.Print("Adjusted Lerp val : " + (-(lerpVal - 1)));
+			}
+			else
+			{
+				tempPoint.y += ropeNotUsed * lerpVal *-(lerpVal - 1);
+				
+			}
+			////GD.Print("Temp point loc : " + tempPoint);
+			ropeDraw.AddPoint(tempPoint);
+		}
+		
+		ropeDraw.AddPoint(p2.Position);
+		
+	}
+
+	Vector2 vec2Lerp(Vector2 p1,Vector2 p2,float val)
+	{
+		return (p1 * val) + (p2 * (1.0f - val));
 	}
 
 }
