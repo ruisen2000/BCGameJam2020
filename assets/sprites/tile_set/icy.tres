@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=7 format=2]
+[gd_resource type="TileSet" load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/tile_set/icicle.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/tile_set/slanty.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/tile_set/thinicile.png" type="Texture" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -13,7 +14,7 @@ points = PoolVector2Array( -0.600037, 0.200012, 139.8, 1.40002, 139.8, 69.8, 130
 points = PoolVector2Array( 0, 0.2, 128, 128.2, 0, 128.2 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 77.1667, -1.08331, 77.1667, 51.6945, 70.9167, 96.8333, 66.75, 126.694, 59.1111, 148.917, 54.25, 162.111, 49.3889, 209.333, 42.4445, 234.333, 38.9722, 234.333, 32.7222, 205.861, 28.5555, 171.139, 22.3055, 147.528, 16.75, 132.25, 11.1945, 102.389, 4.94446, 78.7778, -1.30554, 58.6389, 0.083313, -0.388885 )
+points = PoolVector2Array( -2, 1, 75, 0, 78, 53, 71, 96, 66, 125, 62, 148, 55, 165, 51, 181, 49, 210, 45, 237, 40, 238, 37, 211, 32, 172, 22, 150, 17, 133, 14, 106, 7, 84, 1, 59 )
 
 [resource]
 0/name = "icicle.png 0"
@@ -75,9 +76,10 @@ points = PoolVector2Array( 77.1667, -1.08331, 77.1667, 51.6945, 70.9167, 96.8333
 } ]
 4/z_index = 0
 5/name = "thinicile.png 5"
+5/texture = ExtResource( 3 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 92, 39, 78, 237 )
+5/region = Rect2( 92, 38, 78, 238 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
