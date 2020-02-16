@@ -29,7 +29,7 @@ public class playerMovment : KinematicBody2D
 	 int strafeSpeed = 100;
 
 	[Export]
-	int jumpStrength = 1000;
+	int jumpStrength = 700;
 
 	[Export]
 	int player = -1;
@@ -57,7 +57,7 @@ public class playerMovment : KinematicBody2D
 	NodePath fall3;
 
 	[Export]
-	float wallJumpCoolDown = 1.0f;
+	float wallJumpCoolDown = 5.0f;
 
 	float currentWallJumpCoolDown = 0.0f;
 

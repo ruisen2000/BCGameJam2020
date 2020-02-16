@@ -102,11 +102,11 @@ __meta__ = {
 }
 
 [node name="HINT" type="Label" parent="."]
-margin_left = 262.37
-margin_top = 67.2992
-margin_right = 305.37
-margin_bottom = 84.2992
-rect_scale = Vector2( 1.19988, 1.5637 )
+margin_left = 82.9055
+margin_top = 64.3731
+margin_right = 125.905
+margin_bottom = 81.3731
+rect_scale = Vector2( 1.10695, 1.15399 )
 custom_fonts/font = SubResource( 3 )
 text = "HINT:"
 __meta__ = {
@@ -114,12 +114,13 @@ __meta__ = {
 }
 
 [node name="actual_hint" type="Label" parent="."]
-margin_left = 352.102
-margin_top = 68.2746
-margin_right = 392.102
-margin_bottom = 85.2746
-rect_scale = Vector2( 1.44177, 1.09865 )
+margin_left = 185.317
+margin_top = 64.3732
+margin_right = 225.317
+margin_bottom = 81.3732
+rect_scale = Vector2( 0.80194, 1.15313 )
 custom_fonts/font = SubResource( 4 )
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
