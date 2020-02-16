@@ -16,13 +16,16 @@ public class ropePhysics : Node2D
 	[Export]
 	float ropeLength;
 
+ 
+
 	playerMovment p1;
 	playerMovment p2;
+    
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+        
 		p1 = (playerMovment)(KinematicBody2D)GetNode(player1);
 		p2 = (playerMovment)(KinematicBody2D)GetNode(player2);
 	}
@@ -34,7 +37,6 @@ public class ropePhysics : Node2D
 
 		doRopePhysics(p1, p2, delta);
 		doRopePhysics(p2, p1, delta);
-
 
 		p1.move();
 		p2.move();
@@ -51,16 +53,32 @@ public class ropePhysics : Node2D
 			// tug on other player
 			if (ropePullVector.Dot(p1.velocity) < 0)
 			{
-				if (p2.isAnchored)
+				if (p1.isAnchored && !p2.isAnchored)
 				{
-					//otherPlayer.MoveAndSlide(velocity, new Vector2(0, -1));
-					//velocity *= 0.9f;
-				}
-				else
-				{
-					p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
+					p2.velocity += p1.velocity * 0.5f;
+					// p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
 					p1.velocity *= 0.5f;
 				}
+				//if (!p1.isAnchored && !p2.isAnchored)
+				//{
+				//	if (p1.velocity.x > 0)
+				//	{
+				//		p1.velocity.x -= p1.airXAccel;
+				//	}
+				//	else
+				//	{
+				//		p1.velocity.x += p1.airXAccel;
+				//	}
+				//	if (p2.velocity.x > 0)
+				//	{
+				//		p2.velocity.x -= p2.airXAccel;
+				//	}
+				//	else
+				//	{
+				//		p2.velocity.x += p2.airXAccel;
+				//	}
+					
+				//}
 			}
 
 			if (ropeLength <= p1.Position.DistanceTo(p2.Position))
@@ -84,11 +102,10 @@ public class ropePhysics : Node2D
 					p1.velocity -= parallelPart;
 				}
 
-				p1.velocity.x += strafeInfluence;
+				// p1.velocity.x += strafeInfluence;
 			}
 
 			
-
 
 		}
 
