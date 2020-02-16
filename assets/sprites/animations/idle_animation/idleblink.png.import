@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/swing.png-6c33f3496f2a63460bbf258dc6cc54ab.stex"
+path="res://.import/idleblink.png-a2ce7dd4118ee3960b40bc44fe7ef1fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/swing.png"
-dest_files=[ "res://.import/swing.png-6c33f3496f2a63460bbf258dc6cc54ab.stex" ]
+source_file="res://assets/sprites/animations/idle_animation/idleblink.png"
+dest_files=[ "res://.import/idleblink.png-a2ce7dd4118ee3960b40bc44fe7ef1fb.stex" ]
 
 [params]
 
