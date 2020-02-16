@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/sprites/tile_set/icy.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
@@ -12,13 +12,14 @@
 [ext_resource path="res://assets/sprites/fog.shader" type="Shader" id=10]
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://ground.tres" type="TileSet" id=12]
+[ext_resource path="res://assets/scenes/rope__.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/scenes/Roping.gd" type="Script" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
-shader_param/color = Vector3( 0.9, 0.8, 0.95 )
-shader_param/OCTAVES = 8
 
 [node name="World" type="Node2D"]
+script = ExtResource( 14 )
 
 [node name="Rope" parent="." instance=ExtResource( 4 )]
 position = Vector2( -336, 544 )
@@ -132,3 +133,5 @@ position = Vector2( 1226.11, 475.545 )
 rotation = -0.185005
 scale = Vector2( 17.8474, 18.9626 )
 texture = ExtResource( 8 )
+
+[node name="rope__" parent="." instance=ExtResource( 13 )]
