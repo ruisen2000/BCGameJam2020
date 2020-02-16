@@ -22,9 +22,14 @@ ropeNode = NodePath("../RigidBody2D")
 position = Vector2( 362.804, 196.844 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+<<<<<<< HEAD
+position = Vector2( 354.246, 297.888 )
+animationsPath = null
+=======
 position = Vector2( 175.501, 461.528 )
 otherPlayerPath = NodePath("../KinematicBody2D2")
 ropeNode = NodePath("../RigidBody2D")
+>>>>>>> 184a62505586b49811600e1f5ed847505069b283
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 163.331, 129.888 )
