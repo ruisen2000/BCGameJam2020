@@ -47,5 +47,6 @@ stream = ExtResource( 8 )
 stream = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.858551, 0 )
 scale = Vector2( 3.84044, -2.12002 )
 shape = SubResource( 1 )
