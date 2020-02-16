@@ -230,7 +230,7 @@ public class playerMovment : KinematicBody2D
 				}
 			}
 
-			if (Input.IsActionPressed("player1_move_jump"))
+			if (Input.IsActionJustPressed("player1_move_jump"))
 			{
 
 				if (onFloor)
@@ -318,7 +318,7 @@ public class playerMovment : KinematicBody2D
 					velocity.x = 0;
 				}
 			}
-			if (Input.IsActionPressed("player2_move_jump"))
+			if (Input.IsActionJustPressed("player2_move_jump"))
 			{
 				
 				if (onFloor)
