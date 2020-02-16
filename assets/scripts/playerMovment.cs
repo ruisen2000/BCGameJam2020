@@ -307,10 +307,6 @@ public class playerMovment : KinematicBody2D
 		}
 	
 
-		if (Position.y-buffer_y > 7) make_fall_sound();
-		// rope physics below
-		buffer_y = (int)Position.y;
-
 	}
 
 	public void make_fall_sound()

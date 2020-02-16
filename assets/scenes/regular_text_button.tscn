@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/scripts/new_game.cs" type="Script" id=1]
+[ext_resource path="res://assets/sprites/button.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/button_pressed.png" type="Texture" id=3]
+
+[node name="TextureButton" type="TextureButton"]
+margin_left = 422.168
+margin_top = 217.824
+margin_right = 932.728
+margin_bottom = 717.824
+rect_scale = Vector2( 0.403673, 0.438032 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+stretch_mode = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
