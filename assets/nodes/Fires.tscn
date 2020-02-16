@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/fire.shader" type="Shader" id=1]
+[ext_resource path="res://assets/nodes/terrain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/nodes/fire.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/transparent = Color( 0, 0, 0, 0 )
+shader_param/inner = Color( 0.423529, 0.145098, 0.145098, 1 )
+shader_param/outer = Color( 0.415686, 0.0313726, 0.0313726, 1 )
+shader_param/inner_threshold = 0.4
+shader_param/outer_threshold = 0.15
+shader_param/soft_edge = 0.04
+shader_param/center = Vector2( 0.5, 0.8 )
+shader_param/OCTAVES = 6
+
+[node name="Fires" type="Node2D"]
+
+[node name="Collidable" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 0, -1 )
+
+[node name="Fire" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 1263.55, 317.046 )
+
+[node name="Fire2" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( -509.65, 381.355 )
+
+[node name="Fire3" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 1416.5, -1789.01 )
+
+[node name="Fire9" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 1404.58, -755.643 )
+
+[node name="Fire4" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 3426.25, -1427.23 )
+
+[node name="Fire5" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 382.966, -1337.06 )
+
+[node name="Fire6" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 2506.33, 295.122 )
+
+[node name="Fire7" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 2588.72, -1767.08 )
+
+[node name="Fire8" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 114.183, -448.544 )
