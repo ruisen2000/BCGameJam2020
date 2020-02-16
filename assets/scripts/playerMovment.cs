@@ -208,6 +208,26 @@ public class playerMovment : KinematicBody2D
 					wallJumpReady = false;
 				}
 			}
+			
+					//animation stuff
+		if(onFloor && velocity.x != 0){
+			if (velocity.x < 0)
+			{
+				animations.FlipH = false;
+			}
+			else if (velocity.x > 0)
+			{
+				animations.FlipH = true;
+			}
+			animations.Play("run");
+		}else if(!onFloor && velocity.y >= walkSpeed) {
+			animations.Play("fall");
+		}else if(!onFloor) {
+			animations.Play("swing");
+		}else{
+			animations.Play("idle");
+		}
+		
 		}
 		else
 		{
@@ -265,9 +285,8 @@ public class playerMovment : KinematicBody2D
 					wallJumpReady = false;
 				}
 			}
-		}
-		
-		//animation stuff
+			
+					//animation stuff
 		if(onFloor && velocity.x != 0){
 			if (velocity.x < 0)
 			{
@@ -277,13 +296,15 @@ public class playerMovment : KinematicBody2D
 			{
 				animations.FlipH = true;
 			}
-			animations.Play("run");
-		}else if(!onFloor) {
-			animations.Play("swing");
+			animations.Play("run2");
+		}else if(!onFloor && velocity.y == walkSpeed) {
+			animations.Play("swing2");
 		}
 		else{
-			animations.Play("idle");
+			animations.Play("idle2");
 		}
+		}
+	
 
 		if (Position.y-buffer_y > 7) make_fall_sound();
 		// rope physics below
