@@ -100,6 +100,18 @@ public class playerMovment : KinematicBody2D
 		airXAccel = 0;
 	}
 	
+//	public override void _ApplyMovement (InputEvent @event)
+//	{
+//		for (i = 0; i < getSlideCOunt(); i++)
+//		{
+//			var collision = getSlideCollision(i);
+//			if (collision.collider.HasMethod("collideWith"))
+//			{
+//				collision.collider.collideWith(collision,self);
+//			}
+//		}
+//	}
+	
 	public override void _Input (InputEvent @event)
 	{
 		if(@event.IsActionReleased("player2_move_jump") && velocity.y < minJumpVelocity)
