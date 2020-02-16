@@ -1,16 +1,18 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/sprites/pixil-frame-0.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/pixil-frame-1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/cloud-1.png.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/cloud.cs" type="Script" id=3]
 [ext_resource path="res://assets/scripts/cloud_right.cs" type="Script" id=4]
-[ext_resource path="res://assets/sprites/idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/pixil-frame-0(1).png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/button.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/cloud-2.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/button_pressed.png" type="Texture" id=7]
+[ext_resource path="res://assets/scripts/new_game.cs" type="Script" id=8]
+[ext_resource path="res://assets/sprites/soundtrack.ogg" type="AudioStream" id=9]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -30,7 +32,7 @@ __meta__ = {
 [node name="pixil-frame-0(1)2" type="Sprite" parent="."]
 position = Vector2( 481.841, 279.733 )
 scale = Vector2( 1.3429, 1.40865 )
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 104.615
@@ -50,40 +52,38 @@ stretch_mode = 4
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 371.838, 112.405 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-animation = "New Anim"
+frames = SubResource( 3 )
 playing = true
-flip_h = true
+flip_v = true
 script = ExtResource( 3 )
 cloud_velocity = 2
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 751.212, 53.8544 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-animation = "New Anim"
+frames = SubResource( 3 )
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 737.01, 168.885 )
 scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-animation = "New Anim"
+frames = SubResource( 3 )
 script = ExtResource( 3 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 431.56
-margin_top = 217.24
-margin_right = 931.56
-margin_bottom = 717.24
+margin_left = 422.168
+margin_top = 217.824
+margin_right = 932.728
+margin_bottom = 717.824
 rect_scale = Vector2( 0.403673, 0.438032 )
 texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
 stretch_mode = 3
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="idle" type="Sprite" parent="."]
-position = Vector2( 678.087, 344.51 )
-scale = Vector2( 1.3429, 1.40865 )
-texture = ExtResource( 5 )
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
