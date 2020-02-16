@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/nodes/terrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scripts/cameraFollow.cs" type="Script" id=4]
 [ext_resource path="res://assets/scenes/rope__.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/nodes/Fires.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,11 +29,16 @@ ropePullSpeed = 100.0
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 3296, -1840 )
+collision_mask = 4
 animationsPath = NodePath("../Player1/playerTemp")
 player = 0
 
 [node name="PLayer2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 3176, -1848 )
+collision_mask = 2
 animationsPath = NodePath("../PLayer2/playerTemp")
 
 [node name="rope__" parent="." instance=ExtResource( 5 )]
+
+[node name="Fires" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, 1 )
