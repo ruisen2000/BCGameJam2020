@@ -19,17 +19,17 @@ public class playerMovment : KinematicBody2D
 	public float maxYVel = 500.0f;
 
 	[Export]
-	float airDashMod = 0.4f;
+	float airDashMod = 10f;
 
 	[Export]
-	public float gravity = 500;
+	public float gravity = 1000f;
 
 	[Export]
 	 int walkSpeed = 300;
 	 int strafeSpeed = 100;
 
 	[Export]
-	int jumpStrength = 720;
+	int jumpStrength = 1000;
 
 	[Export]
 	int player = -1;
@@ -37,17 +37,13 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	float wallNoSlideTime = 1.0f;
 
-	[Export]
-	NodePath jump1_;
-
-	AudioStreamPlayer jump1;
-
 	AnimatedSprite animations;
 
 	float currentWallNoSlideTime = 0.0f;
 	public bool isAnchored = false;
 	bool onWall = false;
 	bool onFloor = false;
+	bool wallJumpReady = true;
 
 	public float airXAccel;
 
@@ -64,8 +60,7 @@ public class playerMovment : KinematicBody2D
 	public override void _Ready()
 	{
 		animations = (AnimatedSprite)GetNode(animationsPath);
-		jump1 = (AudioStreamPlayer)GetNode(jump1_);
-
+		airXAccel = 0;
 	}
 	
 	public override void _Input (InputEvent @event)
@@ -92,7 +87,7 @@ public class playerMovment : KinematicBody2D
 
 		if (!onWall)
 		{
-			velocity.y += delta * gravity;
+			velocity.y += gravity * delta;
 			velocity.y = Math.Min(velocity.y, maxYVel);
 		}
 		else
@@ -114,6 +109,7 @@ public class playerMovment : KinematicBody2D
 		if (onFloor)
 		{
 			currentWallNoSlideTime = 0;
+			wallJumpReady = true;
 		}
 
 		//Aight this is pretty bad I admit but w/e game jam!
@@ -126,9 +122,14 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.x = -walkSpeed;
 				}
-				else if (!onWall)
+				else
 				{
-					velocity.x += -walkSpeed * airDashMod;
+					airXAccel = walkSpeed * airDashMod * delta;
+					if (velocity.x > -maxXVel)
+					{
+						velocity.x -= airXAccel;
+					}
+					//velocity.x = Math.Max(-maxXVel, velocity.x - airXAccel);
 				}
 				
 			}
@@ -138,9 +139,14 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.x = walkSpeed;
 				}
-				else if (!onWall)
+				else
 				{
-					velocity.x += walkSpeed * airDashMod;
+					airXAccel = walkSpeed * airDashMod * delta;
+					if (velocity.x < maxXVel)
+					{
+						velocity.x += airXAccel;
+					}
+					// velocity.x = Math.Min(maxXVel, velocity.x + airXAccel);
 				}
 			}
 			else
@@ -155,8 +161,12 @@ public class playerMovment : KinematicBody2D
 			{
 				if (onFloor)
 				{
-					make_jump();
 					velocity.y = -jumpStrength;
+				}
+				if (onWall && wallJumpReady)
+				{
+					velocity.y = -jumpStrength;
+					wallJumpReady = false;
 				}
 			}
 		}
@@ -169,9 +179,14 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.x = -walkSpeed;
 				}
-				else if (!onWall)
+				else
 				{
-					velocity.x += -walkSpeed * airDashMod;
+					airXAccel = walkSpeed * airDashMod * delta;
+					if (velocity.x > -maxXVel)
+					{
+						velocity.x -= airXAccel;
+					}
+					// velocity.x = Math.Max(-maxXVel, velocity.x - airXAccel);
 				}
 			}
 			else if (Input.IsActionPressed("player2_move_right"))
@@ -180,9 +195,14 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.x = walkSpeed;
 				}
-				else if (!onWall)
+				else
 				{
-					velocity.x += walkSpeed * airDashMod;
+					airXAccel = walkSpeed * airDashMod * delta;
+					if (velocity.x < maxXVel)
+					{
+						velocity.x += airXAccel;
+					}
+					//velocity.x = Math.Min(maxXVel, velocity.x + airXAccel);
 				}
 			}
 			else
@@ -196,8 +216,12 @@ public class playerMovment : KinematicBody2D
 			{
 				if (onFloor)
 				{
-					make_jump();
 					velocity.y = -jumpStrength;
+				}
+				if (onWall && wallJumpReady)
+				{
+					velocity.y = -jumpStrength;
+					wallJumpReady = false;
 				}
 			}
 		}
@@ -223,17 +247,12 @@ public class playerMovment : KinematicBody2D
 
 	}
 
-	public void make_jump()
-	{
-		jump1.Play();
-	}
-
 	public void move()
 	{
 		MoveAndSlide(velocity, new Vector2(0, -1));
 
 		onFloor = IsOnFloor();
-		onWall = IsOnWall();
+		onWall = (IsOnWall() && wallJumpReady);
 	}
 
 	public bool hitNonWall()
