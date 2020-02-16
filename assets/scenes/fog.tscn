@@ -3,13 +3,13 @@
 [ext_resource path="res://assets/sprites/fog.shader" type="Shader" id=1]
 [ext_resource path="res://assets/sprites/pixil-frame-1.png" type="Texture" id=2]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
 shader_param/color = Vector3( 0.9, 0.9, 0.9 )
-shader_param/OCTAVES = 1
+shader_param/OCTAVES = 2
 
 [node name="fog" type="Sprite"]
-material = SubResource( 1 )
+material = SubResource( 3 )
 position = Vector2( 510.894, 293.819 )
 scale = Vector2( 1.41732, 1.41063 )
 texture = ExtResource( 2 )
