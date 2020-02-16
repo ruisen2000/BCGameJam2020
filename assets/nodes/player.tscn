@@ -31,11 +31,12 @@ height = 30.7656
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
+animationsPath = NodePath("playerTemp")
 player = 1
 
 [node name="playerTemp" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "run"
+animation = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

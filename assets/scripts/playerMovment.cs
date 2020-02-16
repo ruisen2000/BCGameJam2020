@@ -6,6 +6,9 @@ public class playerMovment : KinematicBody2D
 
 	[Export]
 	NodePath otherPlayerPath;
+	
+		[Export]
+	NodePath animationsPath;
 
 	[Export]
 	NodePath ropeNode;
@@ -37,6 +40,7 @@ public class playerMovment : KinematicBody2D
 	float wallNoSlideTime = 1.0f;
 
 	playerMovment otherPlayer;
+	AnimatedSprite animations;
 
 	float currentWallNoSlideTime = 0.0f;
 	bool isAnchored = false;
@@ -56,6 +60,7 @@ public class playerMovment : KinematicBody2D
 	public override void _Ready()
 	{
 		otherPlayer = (playerMovment)GetNode(otherPlayerPath);
+		animations = (AnimatedSprite)GetNode(animationsPath);
 		//gravity =  2 * (float)maxJumpHeight / (float) Math.Pow(jumpDuration, 2);
 		//maxJumpVelocity = Math.Sqrt(2 * gravity * maxJumpHeight);
 		//minJumpVelocity = -Math.Sqrt(2 * gravity * minJumpHeight);
@@ -191,6 +196,14 @@ public class playerMovment : KinematicBody2D
 					velocity.y = -jumpStrength;
 				}
 			}
+		}
+		
+		//animation stuff
+		if(onFloor && velocity.x != 0){
+			animations.Play("run");
+		}
+		else{
+			animations.Play("idle");
 		}
 
 		// rope physics below
