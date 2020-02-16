@@ -31,7 +31,7 @@ texture = ExtResource( 4 )
 
 [node name="light" type="Light2D" parent="."]
 texture = ExtResource( 3 )
-texture_scale = 2.98
+texture_scale = 0.01
 color = Color( 0.835294, 0.0431373, 0.0431373, 1 )
-energy = 1.56
+energy = 2.27
 script = ExtResource( 5 )
