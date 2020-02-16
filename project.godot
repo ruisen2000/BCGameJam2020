@@ -16,11 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="BcGameJam"
-run/main_scene="res://assets/scenes/Main.tscn"
+run/main_scene="res://assets/scenes/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+gd_global_audio="res://assets/scripts/gd_global_audio.gd"
 Globals="*res://Globals.cs"
 
 [input]
