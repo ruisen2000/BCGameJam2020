@@ -35,6 +35,8 @@ texture = ExtResource( 7 )
 [node name="fog" parent="." instance=ExtResource( 1 )]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = 104.615
 margin_top = 96.9722
 margin_right = 935.615
@@ -44,7 +46,7 @@ __meta__ = {
 }
 
 [node name="logo" type="TextureRect" parent="VBoxContainer"]
-margin_right = 831.0
+margin_right = 1140.0
 margin_bottom = 100.0
 texture = ExtResource( 5 )
 stretch_mode = 4

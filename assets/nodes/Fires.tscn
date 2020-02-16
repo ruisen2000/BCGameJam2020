@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sprites/fire.shader" type="Shader" id=1]
-[ext_resource path="res://assets/nodes/terrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/nodes/fire.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -16,9 +15,6 @@ shader_param/center = Vector2( 0.5, 0.8 )
 shader_param/OCTAVES = 6
 
 [node name="Fires" type="Node2D"]
-
-[node name="Collidable" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -1 )
 
 [node name="Fire" parent="." instance=ExtResource( 3 )]
 material = SubResource( 1 )
