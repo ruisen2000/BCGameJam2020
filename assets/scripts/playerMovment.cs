@@ -8,20 +8,21 @@ public class playerMovment : KinematicBody2D
 	NodePath otherPlayerPath;
 
 	[Export]
-	NodePath ropeNode;
+	float ropeLength = 300.0f;
 
 	[Export]
 	float wallSlideSpeed = 100.0f;
 
 	[Export]
-	float maxXVel = 300.0f;
-	float maxYVel = 500.0f;
+	public float maxXVel = 300.0f;
+	[Export]
+	public float maxYVel = 500.0f;
 
 	[Export]
 	float airDashMod = 0.4f;
 
 	[Export]
-	 float gravity = 500;
+	public float gravity = 500;
 
 	[Export]
 	 int walkSpeed = 300;
@@ -39,9 +40,11 @@ public class playerMovment : KinematicBody2D
 	playerMovment otherPlayer;
 
 	float currentWallNoSlideTime = 0.0f;
-	bool isAnchored = false;
+	public bool isAnchored = false;
 	bool onWall = false;
 	bool onFloor = false;
+
+	public float airXAccel;
 
 	public Vector2 velocity;
 	
@@ -73,7 +76,7 @@ public class playerMovment : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		float airXAccel = 0.0f;
+		airXAccel = 0.0f;
 
 		if (onFloor || onWall)
 		{
@@ -122,8 +125,9 @@ public class playerMovment : KinematicBody2D
 				}
 				else if (!onWall)
 				{
-					airXAccel = -walkSpeed * airDashMod;
+					velocity.x += -walkSpeed * airDashMod;
 				}
+				
 			}
 			else if (Input.IsActionPressed("player1_move_right"))
 			{
@@ -133,7 +137,7 @@ public class playerMovment : KinematicBody2D
 				}
 				else if (!onWall)
 				{
-					airXAccel = walkSpeed * airDashMod;
+					velocity.x += walkSpeed * airDashMod;
 				}
 			}
 			else
@@ -163,7 +167,7 @@ public class playerMovment : KinematicBody2D
 				}
 				else if (!onWall)
 				{
-					airXAccel = -walkSpeed * airDashMod;
+					velocity.x += -walkSpeed * airDashMod;
 				}
 			}
 			else if (Input.IsActionPressed("player2_move_right"))
@@ -174,7 +178,7 @@ public class playerMovment : KinematicBody2D
 				}
 				else if (!onWall)
 				{
-					airXAccel = walkSpeed * airDashMod;
+					velocity.x += walkSpeed * airDashMod;
 				}
 			}
 			else
@@ -194,69 +198,29 @@ public class playerMovment : KinematicBody2D
 		}
 
 		// rope physics below
-		ropePhysics rope = (ropePhysics)GetNode(ropeNode);
-		if (rope.Length <= Position.DistanceTo(otherPlayer.Position))
-		{
-			Vector2 ropePullVector = (otherPlayer.Position - Position).Normalized();
-			// tug on other player
-			if (ropePullVector.Dot(velocity) < 0)
-			{
-				if (otherPlayer.isAnchored)
-				{
-					//otherPlayer.MoveAndSlide(velocity, new Vector2(0, -1));
-					//velocity *= 0.9f;
-				}
-				else
-				{
-					otherPlayer.MoveAndSlide(velocity * 0.5f, new Vector2(0, -1));
-					velocity *= 0.5f;
-				}
-			}
 
-			if (rope.Length <= Position.DistanceTo(otherPlayer.Position))
-			{
-				float strafeInfluence;
-				if ((-ropePullVector).Angle() > Math.PI)
-				{
-					strafeInfluence = 0;
-				}
-				else if (airXAccel < 0)
-				{
-					strafeInfluence = airXAccel * (float)(Math.Cos((-ropePullVector).Angle()) + 1);
-				}
-				else
-				{
-					strafeInfluence = airXAccel * (-1) * (float)(Math.Cos((-ropePullVector).Angle()) - 1);
-				}
-				Vector2 parallelPart = (velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
-				if (parallelPart.Dot(ropePullVector) < 0)
-				{
-					velocity -= parallelPart;
-				}
-			}
-		}
 
-		if (GetSlideCount() > 0 && GetSlideCollision(0) != null && !onFloor)
-		{
-			velocity = new Vector2(0, 0);
-			velocity.y += delta * gravity;
-			velocity.y = Math.Min(velocity.y, maxYVel);
-		}
+	}
 
+	public void move()
+	{
 		MoveAndSlide(velocity, new Vector2(0, -1));
 
 		onFloor = IsOnFloor();
 		onWall = IsOnWall();
-
-
-		//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-		//  public override void _Process(float delta)
-		//  {
-		//      
-		//  }
 	}
 
+	public bool hitNonWall()
+	{
 
+		if (GetSlideCount() > 0 && !onFloor)
+		{
+			KinematicCollision2D col = GetSlideCollision(0);
+			return col.Normal.y > 0;
+			// true;
+		}
+		return false;
+	}
 	public void applyForce(Vector2 force)
 	{
 		velocity += force;

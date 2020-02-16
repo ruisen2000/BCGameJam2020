@@ -1,74 +1,105 @@
 using Godot;
 using System;
 
-public class ropePhysics : DampedSpringJoint2D
+public class ropePhysics : Node2D
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
 
-	//playerMovment p1;
-	//playerMovment p2;
+	[Export]
+	NodePath player1;
+	
+	[Export]
+	NodePath player2;
+
+	[Export]
+	float ropeLength;
+
+	playerMovment p1;
+	playerMovment p2;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//p1 = (playerMovment)GetNode(NodeA);
-		//p2 = (playerMovment)GetNode(NodeB);
-	}
-	[Export]
-	float tugForce = 10;
 
+		p1 = (playerMovment)(KinematicBody2D)GetNode(player1);
+		p2 = (playerMovment)(KinematicBody2D)GetNode(player2);
+	}
+	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
-		//if (Length <= p1.Position.DistanceTo(p2.Position))
-		//{
-			//// Rope is taut; apply force to players
-			//Vector2 relativeDirection = p1.Position - p2.Position;
-			//relativeDirection = relativeDirection.Normalized();
 
-			////p1.Position = (-relativeDirection) * p1.Position.DistanceTo(p2.Position);
-			////p2.Position = (relativeDirection) * p2.Position.DistanceTo(p1.Position);
 
-			//Vector2 p1NewVelocity = p1.velocity - ((p1.velocity.Dot(relativeDirection) / relativeDirection.Dot(relativeDirection)) * relativeDirection);
-			//Vector2 p2NewVelocity = p2.velocity - ((p2.velocity.Dot(relativeDirection) / relativeDirection.Dot(relativeDirection)) * relativeDirection);
+		doRopePhysics(p1, p2, delta);
+		doRopePhysics(p2, p1, delta);
 
-			////float p1NewY = p1.velocity.y / (float)Math.Sin((-relativeDirection).AngleTo(new Vector2(1, 0)));
-			////float p1NewX = p1.velocity.x / (float)Math.Cos((-relativeDirection).AngleTo(new Vector2(1, 0)));
 
-			////float p2NewY = p2.velocity.y / (float)Math.Sin(relativeDirection.AngleTo(new Vector2(1, 0)));
-			////float p2NewX = p2.velocity.x / (float)Math.Cos(relativeDirection.AngleTo(new Vector2(1, 0)));
+		p1.move();
+		p2.move();
 
-			////p1.velocity = new Vector2(p1NewX, p1NewY);
-			////p2.velocity += new Vector2(p2NewX, p2NewY);
-			//p2.velocity = p2NewVelocity;
 
-			////Vector2 p1Force = tugForce * -relativeDirection;
-			////Vector2 p2Force = tugForce * relativeDirection;
-			////p1.applyForce(p1Force);
-			////p2.applyForce(p2Force);
-		//}
 	}
-	//public void calculateRope(NodePath movingPlayer)
-	//{
-	//	NodePath otherPlayer = null;
-	//	if (movingPlayer == NodeA)
-	//	{
-	//		otherPlayer = NodeB;
-	//	}
-	//	else if (movingPlayer == NodeB)
-	//	{
-	//		otherPlayer = NodeA;
-	//	}
 
-	//	playerMovment moveP = (playerMovment)GetNode(movingPlayer);
-	//	playerMovment otherP = (playerMovment)GetNode(otherPlayer);
+	void doRopePhysics(playerMovment p1,playerMovment p2,float delta)
+	{
 
-	//	Vector2 ropePullVector = (otherP.Position - moveP.Position).Normalized();
+		if (ropeLength <= p1.Position.DistanceTo(p2.Position))
+		{
+			Vector2 ropePullVector = (p2.Position - p1.Position).Normalized();
+			// tug on other player
+			if (ropePullVector.Dot(p1.velocity) < 0)
+			{
+				if (p2.isAnchored)
+				{
+					//otherPlayer.MoveAndSlide(velocity, new Vector2(0, -1));
+					//velocity *= 0.9f;
+				}
+				else
+				{
+					p2.MoveAndSlide(p1.velocity * 0.5f, new Vector2(0, -1));
+					p1.velocity *= 0.5f;
+				}
+			}
 
-	//	Vector2 newVelocity = moveP.velocity - ((moveP.velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector);
-		
-	//	moveP.velocity = newVelocity;
-	//}
+			if (ropeLength <= p1.Position.DistanceTo(p2.Position))
+			{
+				float strafeInfluence;
+				if ((-ropePullVector).Angle() > Math.PI)
+				{
+					strafeInfluence = 0;
+				}
+				else if (p1.airXAccel < 0)
+				{
+					strafeInfluence = p1.airXAccel * (float)(Math.Cos((-ropePullVector).Angle()) + 1);
+				}
+				else
+				{
+					strafeInfluence = p1.airXAccel * (-1) * (float)(Math.Cos((-ropePullVector).Angle()) - 1);
+				}
+				Vector2 parallelPart = (p1.velocity.Dot(ropePullVector) / ropePullVector.Dot(ropePullVector)) * ropePullVector;
+				if (parallelPart.Dot(ropePullVector) < 0)
+				{
+					p1.velocity -= parallelPart;
+				}
+
+				p1.velocity.x += strafeInfluence;
+			}
+
+			
+
+
+		}
+
+
+
+		if (p1.hitNonWall())
+		{
+			p1.velocity = new Vector2(0, 0);
+			p1.velocity.y += delta * p1.gravity;
+			p1.velocity.y = Math.Min(p1.velocity.y, p1.maxYVel);
+		}
+	}
+
 }
