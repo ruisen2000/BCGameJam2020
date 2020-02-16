@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/nodes/fonts/SfPixelateBoldOblique-PqXZ.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/scripts/timer.cs" type="Script" id=2]
@@ -21,9 +21,6 @@ animations = [ {
 } ]
 
 [sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 8 )
-
-[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 8 )
 
 [node name="Node2D" type="Node2D"]
@@ -50,14 +47,17 @@ __meta__ = {
 }
 
 [node name="p1" type="Label" parent="."]
-margin_left = 31.7772
-margin_top = 301.883
-margin_right = 137.777
-margin_bottom = 383.883
+margin_left = 23.3653
+margin_top = 235.235
+margin_right = 130.365
+margin_bottom = 351.235
+rect_scale = Vector2( 1.5, 1.5 )
 text = "P1
 left: A
 right: D
-jump: W
+jump: SPACEBAR
+ETEND ROPE: W
+RETRACT ROPE: S
 "
 uppercase = true
 __meta__ = {
@@ -65,14 +65,17 @@ __meta__ = {
 }
 
 [node name="p2" type="Label" parent="."]
-margin_left = 869.279
-margin_top = 312.475
-margin_right = 1010.28
-margin_bottom = 394.475
+margin_left = 734.999
+margin_top = 236.587
+margin_right = 925.999
+margin_bottom = 368.587
+rect_scale = Vector2( 1.5, 1.5 )
 text = "P2
-left: LEFT ARROW
-right: RIGHT ARROW
-jump: UP ARROW
+left: LEFT KEY
+right: RIGHT KEY
+jump: NUMP 0/ENT/CTRL
+EXTEND ROPE: UP KEY
+RETRACT ROPE: DOWN KEY
 "
 uppercase = true
 __meta__ = {
@@ -102,10 +105,10 @@ __meta__ = {
 }
 
 [node name="HINT" type="Label" parent="."]
-margin_left = 82.9055
-margin_top = 64.3731
-margin_right = 125.905
-margin_bottom = 81.3731
+margin_left = 81.6114
+margin_top = 61.1378
+margin_right = 124.611
+margin_bottom = 78.1378
 rect_scale = Vector2( 1.10695, 1.15399 )
 custom_fonts/font = SubResource( 3 )
 text = "HINT:"
@@ -119,8 +122,6 @@ margin_top = 64.3732
 margin_right = 225.317
 margin_bottom = 81.3732
 rect_scale = Vector2( 0.80194, 1.15313 )
-custom_fonts/font = SubResource( 4 )
-autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
