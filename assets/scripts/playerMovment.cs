@@ -286,7 +286,6 @@ public class playerMovment : KinematicBody2D
 				}
 			}
 			
-					//animation stuff
 		if(onFloor && velocity.x != 0){
 			if (velocity.x < 0)
 			{
@@ -297,12 +296,14 @@ public class playerMovment : KinematicBody2D
 				animations.FlipH = true;
 			}
 			animations.Play("run2");
-		}else if(!onFloor && velocity.y == walkSpeed) {
+		}else if(!onFloor && velocity.y >= walkSpeed) {
+			animations.Play("fall2");
+		}else if(!onFloor) {
 			animations.Play("swing2");
-		}
-		else{
+		}else{
 			animations.Play("idle2");
 		}
+		
 		}
 	
 
