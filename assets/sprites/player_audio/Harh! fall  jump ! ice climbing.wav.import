@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Harh! fall  jump ! ice climbing.wav-5bb18f88f015b140aaedbef20006f93f.sample"
+
+[deps]
+
+source_file="res://assets/sprites/player_audio/Harh! fall  jump ! ice climbing.wav"
+dest_files=[ "res://.import/Harh! fall  jump ! ice climbing.wav-5bb18f88f015b140aaedbef20006f93f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,43 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ground.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/scenes/MovingPlatformUp.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/scenes/MovingPlatformSide.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( -3473402, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 589838, 0, 0, 655374, 0, 0 )
-
-[node name="KinematicBody2D2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 454.947, 471.598 )
-otherPlayerPath = NodePath("../KinematicBody2D")
-ropeNode = NodePath("../RigidBody2D")
-
-[node name="RigidBody2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 362.804, 196.844 )
+tile_data = PoolIntArray( 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 393217, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 458753, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 589838, 0, 0, 655374, 0, 0 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-<<<<<<< HEAD
 position = Vector2( 354.246, 297.888 )
 animationsPath = null
-=======
-position = Vector2( 175.501, 461.528 )
-otherPlayerPath = NodePath("../KinematicBody2D2")
-ropeNode = NodePath("../RigidBody2D")
->>>>>>> 184a62505586b49811600e1f5ed847505069b283
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 163.331, 129.888 )
 current = true
 zoom = Vector2( 2, 2 )
-
-[node name="MovingPlatform" parent="." instance=ExtResource( 4 )]
-position = Vector2( 647.006, 463.226 )
-
-[node name="MovingPlatform2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1042.26, 468.261 )

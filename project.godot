@@ -20,8 +20,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-global_="res://assets/scripts/global_.cs"
-gd_global_audio="*res://assets/scripts/gd_global_audio.gd"
+gd_global_audio="res://assets/scripts/gd_global_audio.gd"
+Globals="*res://Globals.cs"
 
 [input]
 

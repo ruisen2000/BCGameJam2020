@@ -10,6 +10,8 @@
 
 [node name="Rope" parent="." instance=ExtResource( 4 )]
 position = Vector2( 148.813, 481.325 )
+player1 = NodePath("../KinematicBody2D2")
+player2 = NodePath("../KinematicBody2D")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -21,8 +23,6 @@ position = Vector2( 1164.25, -3356.29 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 152.843, 471.598 )
-otherPlayerPath = NodePath("../KinematicBody2D2")
-ropeNode = NodePath("../Rope")
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 355.06, -194.6 )
@@ -36,5 +36,5 @@ position = Vector2( 472.788, 450.353 )
 position = Vector2( 483.109, -2657.4 )
 
 [node name="KinematicBody2D2" parent="." instance=ExtResource( 2 )]
-otherPlayerPath = NodePath("../KinematicBody2D")
-ropeNode = NodePath("../Rope")
+position = Vector2( 289.604, 416.36 )
+player = 0

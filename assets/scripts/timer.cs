@@ -24,7 +24,7 @@ public class timer : Node2D
 
 		if(label.Text == "0")
 		{
-			GetTree().ChangeScene("res://assets/scenes/Roping.tscn");
+			GetTree().ChangeScene("res://assets/scenes/FirstLevel.tscn");
 		}
  }
 }
