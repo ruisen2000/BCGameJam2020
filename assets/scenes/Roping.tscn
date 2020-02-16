@@ -29,12 +29,6 @@ player1Path = NodePath("../Player 1")
 player2Path = NodePath("../Player 2")
 
 [node name="RopeController" type="Node2D" parent="."]
-<<<<<<< HEAD
-script = ExtResource( 4 )
-player1 = NodePath("../Player 1")
-player2 = NodePath("../Player 2")
-ropeLength = 300.0
-=======
 position = Vector2( 65.9896, -145.995 )
 script = ExtResource( 4 )
 player1 = NodePath("../Player 1")
@@ -44,4 +38,3 @@ player2 = NodePath("../Player 2")
 position = Vector2( 284.951, 417.86 )
 scale = Vector2( 0.487508, 0.466473 )
 texture = ExtResource( 6 )
->>>>>>> 82d597dc7685400a9a29091870f70ada6d3456ee
