@@ -11,7 +11,7 @@ public class playerMovment : KinematicBody2D
 	float ropeLength = 300.0f;
 
 	[Export]
-	float wallSlideSpeed = 100.0f;
+	float wallSlideSpeed = 130.0f;
 
 	[Export]
 	public float maxXVel = 300.0f;
@@ -35,7 +35,7 @@ public class playerMovment : KinematicBody2D
 	int player = -1;
 
 	[Export]
-	float wallNoSlideTime = 1.0f;
+	float wallNoSlideTime = 0.2f;
 
 	AnimatedSprite animations;
 
