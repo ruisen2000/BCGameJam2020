@@ -56,6 +56,11 @@ public class playerMovment : KinematicBody2D
 	[Export]
 	NodePath fall3;
 
+	[Export]
+	float wallJumpCoolDown = 1.0f;
+
+	float currentWallJumpCoolDown = 0.0f;
+
 	AudioStreamPlayer jj1;
 	AudioStreamPlayer jj2;
 	AudioStreamPlayer jj3;
@@ -118,7 +123,11 @@ public class playerMovment : KinematicBody2D
 		{
 			velocity.y = (float)minJumpVelocity;
 		}
-		
+
+		if (@event.IsActionReleased("player1_move_jump") && velocity.y < minJumpVelocity)
+		{
+			velocity.y = (float)minJumpVelocity;
+		}
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -158,8 +167,20 @@ public class playerMovment : KinematicBody2D
 		if (onFloor)
 		{
 			currentWallNoSlideTime = 0;
+			currentWallJumpCoolDown = 0;
 			wallJumpReady = true;
 		}
+
+		if(currentWallJumpCoolDown < wallJumpCoolDown)
+		{
+			currentWallJumpCoolDown += delta;
+		}
+		else
+		{
+			wallJumpReady = true;
+			currentWallJumpCoolDown = 0.0f;
+		}
+
 
 		//Aight this is pretty bad I admit but w/e game jam!
 		if (player == 0)
@@ -208,7 +229,7 @@ public class playerMovment : KinematicBody2D
 
 			if (Input.IsActionPressed("player1_move_jump"))
 			{
-				
+
 				if (onFloor)
 				{
 					make_jump_sound();
@@ -218,6 +239,14 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.y = -jumpStrength;
 					wallJumpReady = false;
+
+					if (GetSlideCount() > 0 )
+					{
+						KinematicCollision2D col = GetSlideCollision(0);
+						velocity.x = col.Normal.x * jumpStrength *0.5f ;
+						// true;
+					}
+
 				}
 			}
 			
@@ -295,6 +324,13 @@ public class playerMovment : KinematicBody2D
 				{
 					velocity.y = -jumpStrength;
 					wallJumpReady = false;
+
+					if (GetSlideCount() > 0)
+					{
+						KinematicCollision2D col = GetSlideCollision(0);
+						velocity.x = col.Normal.x * jumpStrength * 0.5f;
+						// true;
+					}
 				}
 			}
 			
