@@ -128,13 +128,14 @@ visible = false
 position = Vector2( 510.107, 269.798 )
 scale = Vector2( 0.533466, 1.02641 )
 frames = SubResource( 5 )
+frame = 2
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 231.507
-margin_top = 29.9286
-margin_right = 729.507
-margin_bottom = 110.929
+margin_left = 246.332
+margin_top = 150.384
+margin_right = 744.332
+margin_bottom = 231.385
 custom_colors/default_color = Color( 0.160784, 0.0196078, 0.0196078, 1 )
 text = "I didn't do it because of the underlying greed that's prevailing, but it is about greed, doing the right thing at the right time using your clout when you have it and what for and what reason.
 																		
@@ -146,3 +147,4 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 503.505, 308.089 )
 current = true
+zoom = Vector2( 0.25, 0.25 )
