@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/nodes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/nodes/terrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/nodes/rope.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scripts/cameraFollow.cs" type="Script" id=4]
 [ext_resource path="res://assets/scenes/rope__.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/nodes/Fires.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scripts/end_scene.gd" type="Script" id=6]
+[ext_resource path="res://assets/nodes/Fires.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 404.657
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,31 +18,42 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -4.02994, 12.1829 )
 current = true
-zoom = Vector2( 0.7, 0.7 )
+zoom = Vector2( 2, 2 )
 script = ExtResource( 4 )
 player1Path = NodePath("../Player1")
 player2Path = NodePath("../PLayer2")
+
+[node name="Fires" parent="." instance=ExtResource( 7 )]
+position = Vector2( 0, -1 )
 
 [node name="RopeController" parent="." instance=ExtResource( 3 )]
 position = Vector2( -4.02994, 12.1829 )
 player1 = NodePath("../Player1")
 player2 = NodePath("../PLayer2")
 ropeDrawPath = NodePath("../rope__")
-ropePoints = 10
+ropePoints = 8
+ropeMinLength = 100.0
 ropePullSpeed = 100.0
+ropePullForce = 100.0
+
+[node name="rope__" parent="." instance=ExtResource( 5 )]
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -198.643, 502.306 )
+position = Vector2( -248, 536 )
 collision_mask = 4
 animationsPath = NodePath("../Player1/playerTemp")
 player = 0
 
 [node name="PLayer2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -318.643, 494.306 )
+position = Vector2( -368, 528 )
 collision_mask = 2
 animationsPath = NodePath("../PLayer2/playerTemp")
 
-[node name="rope__" parent="." instance=ExtResource( 5 )]
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource( 6 )
+p1 = NodePath("../Player1")
+p2 = NodePath("../PLayer2")
 
-[node name="Fires" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, 1 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 4610.82, -6110.73 )
+shape = SubResource( 1 )
