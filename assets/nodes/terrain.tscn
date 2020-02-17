@@ -23,6 +23,7 @@ tile_data = PoolIntArray( -6946742, 1610612747, 0, -6750140, -1610612725, 0, -64
 [node name="Background" type="TileMap" parent="decor"]
 self_modulate = Color( 0.309804, 0.729412, 0.835294, 1 )
 show_behind_parent = true
+light_mask = 8
 tile_set = ExtResource( 2 )
 collision_layer = 16
 collision_mask = 16

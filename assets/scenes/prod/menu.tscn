@@ -1,93 +1,109 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/scenes/fog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/scenes/regular_text_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/scripts/cloud.cs" type="Script" id=3]
-[ext_resource path="res://assets/scripts/cloud_right.cs" type="Script" id=4]
-[ext_resource path="res://assets/sprites/pixil-frame-0.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/cloud-2.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/pixil-frame-1.png" type="Texture" id=7]
+[ext_resource path="res://assets/nodes/fonts/SfPixelateBold-vRK4.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/nodes/fonts/SfPixelate-wBgw.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/sprites/head.png" type="Texture" id=3]
+[ext_resource path="res://assets/scripts/new_game.cs" type="Script" id=4]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="DynamicFont" id=1]
+size = 500
+font_data = ExtResource( 1 )
 
-[node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 30.3344
-margin_top = 23.2852
-margin_right = -374.666
-margin_bottom = 19.2852
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 2 )
 
-[node name="pixil-frame-1" type="Sprite" parent="."]
-position = Vector2( 921.938, 515.565 )
-scale = Vector2( 2.50548, 2.44354 )
-texture = ExtResource( 7 )
+[node name="Control" type="Node2D"]
 
-[node name="fog" parent="." instance=ExtResource( 1 )]
-position = Vector2( 926.228, 518.78 )
-scale = Vector2( 2.49892, 2.44354 )
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -782.619
-margin_top = -535.678
-margin_right = 1114.38
-margin_bottom = 508.322
+margin_left = -660.926
+margin_top = -345.922
+margin_right = 701.074
+margin_bottom = 154.078
+custom_fonts/font = SubResource( 1 )
+text = "Play!"
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="logo" type="TextureRect" parent="VBoxContainer"]
-margin_right = 1897.0
-margin_bottom = 100.0
-texture = ExtResource( 5 )
-stretch_mode = 4
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -869.71
+margin_top = 180.915
+margin_right = -153.71
+margin_bottom = 684.915
+custom_fonts/normal_font = SubResource( 2 )
+text = "P1			
+left: A
+right: D
+jump: SPACEBAR
+ETEND ROPE: W
+RETRACT ROPE: S
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 211.718, 338.355 )
-scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-playing = true
-script = ExtResource( 3 )
-cloud_velocity = 2
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 55.8503
+margin_top = 203.072
+margin_right = 1015.85
+margin_bottom = 815.072
+custom_fonts/normal_font = SubResource( 2 )
+text = "P2
+left: LEFT KEY
+right: RIGHT KEY
+jump: NUMP 0/ENT/CTRL
+EXTEND ROPE: UP KEY
+RETRACT ROPE: DOWN KEY
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
-position = Vector2( 664.334, 543.743 )
-scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-script = ExtResource( 4 )
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 670.868
+margin_top = 117.387
+margin_right = 916.868
+margin_bottom = 363.387
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( 1733.15, 225.104 )
-scale = Vector2( 5.33105, 4.71462 )
-frames = SubResource( 1 )
-script = ExtResource( 3 )
-
-[node name="TextureButton" parent="." instance=ExtResource( 2 )]
-anchor_left = 0.619
-anchor_top = 0.487
-anchor_right = 0.619
-anchor_bottom = 0.487
-margin_left = -258.764
-margin_top = -157.499
-margin_right = 261.236
-margin_bottom = 342.501
-rect_scale = Vector2( 1, 1 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 931.301, 523.104 )
-current = true
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -602.901
+margin_top = 74.0901
+margin_right = -356.901
+margin_bottom = 320.09
+texture = ExtResource( 3 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

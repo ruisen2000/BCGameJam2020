@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 
-public class new_game : TextureButton
+public class new_game : Button
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;
@@ -21,7 +21,7 @@ public class new_game : TextureButton
 		if (Pressed)
 		{
 
-			GetTree().ChangeScene("res://assets/scenes/counters.tscn");
+			GetTree().ChangeScene("res://assets/scenes/prod/main level.tscn");
 		}
 	}
 }
